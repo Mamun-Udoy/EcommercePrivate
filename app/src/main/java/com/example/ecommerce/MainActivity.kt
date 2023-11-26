@@ -18,31 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navController = findNavController(R.id.mainfragment)
-
-        bottombar()
     }
 
-    private fun bottombar() {
 
-        binding.bottomNavigationView.background = null
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.home -> {
-                    true
-                }
-
-                R.id.cart -> {
-                    true
-                }
-
-                R.id.person -> {
-                    true
-                }
-                else -> false
-            }
-        }
-
-
-    }
 }
