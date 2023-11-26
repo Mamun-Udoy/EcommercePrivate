@@ -35,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
             val userEmail = binding.useremail.text.toString()
             val userPassword = binding.userpassword.text.toString()
 
+            viewModel.getUserInfo(userEmail,userPassword)
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

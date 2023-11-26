@@ -1,5 +1,6 @@
 package com.example.ecommerce.api
 
+import com.example.ecommerce.data_model.UserRegistrationInfoResponse
 import com.example.ecommerce.data_model.UserRequest
 import com.example.ecommerce.data_model.UserResponse
 import retrofit2.Response
@@ -11,7 +12,7 @@ import retrofit2.http.POST
 interface User {
 
 
-    @FormUrlEncoded
+    @FormUrlEncoded // when we are using field we have to give this annotation to create form
     @POST("users")
     suspend fun login(
         @Field("username") userName: String,
@@ -20,6 +21,6 @@ interface User {
 
 
     @POST("users")
-    suspend fun signup(@Body userRequest: UserRequest): Response<UserResponse>
+    suspend fun signup(@Body userRequest: UserRequest): Response<UserRegistrationInfoResponse>
 
 }

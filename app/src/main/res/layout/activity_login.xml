@@ -126,9 +126,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="LOGIN"
+        android:textSize="20dp"
+        style="@style/Widget.Material3.Button"
         app:backgroundTint="#FF3D00"
         app:layout_constraintEnd_toEndOf="@+id/email"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/email"
         app:layout_constraintTop_toBottomOf="@+id/continueWithoutSignup" />
 
