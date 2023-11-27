@@ -1,6 +1,7 @@
 package com.example.ecommerce.ui.signup
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,39 +12,23 @@ import kotlinx.coroutines.launch
 
 class SignUpViewModel : ViewModel() {
 
-    val postUserInfo: MutableLiveData<SignUpData> = MutableLiveData()
+    //val postUserInfo: MutableLiveData<SignUpData> = MutableLiveData()
+
+    private val _registrationResult = MutableLiveData<Boolean>()
+    val registrationResult: LiveData<Boolean> = _registrationResult
 
 
-    fun postUserInfo(signUpData: SignUpData) = viewModelScope.launch {
-
-        val userRequest = UserRequest(
-            address = UserRequest.Address(
-                city = signUpData.city,
-                geolocation = UserRequest.Address.Geolocation(
-                    lat = signUpData.latitude,
-                    long = signUpData.longitude
-                ),
-                number = signUpData.number.toIntOrNull(),
-                street = signUpData.street,
-                zipcode = signUpData.zipCode
-            ),
-            email = signUpData.email,
-            name = UserRequest.Name(
-                firstname = signUpData.firstName,
-                lastname = signUpData.lastName
-            ),
-            password = signUpData.password,
-            phone = signUpData.phoneNumber,
-            username = signUpData.username
+    fun postUserInfo(userRequest: UserRequest) = viewModelScope.launch {
 
 
-        )
 
         Log.d("username", "print username ${userRequest.username}")
 
         val response = RetrofitInstance.api.signup(userRequest)
 
         if (response.isSuccessful) {
+
+            _registrationResult.value = true
 
             val userName = response.body()?.username.toString()
             val userEmail = response.body()?.email
@@ -71,6 +56,7 @@ class SignUpViewModel : ViewModel() {
 
 
         } else {
+            _registrationResult.value = false
             val code = response.code()
             val error = response.errorBody().toString()
             Log.d(

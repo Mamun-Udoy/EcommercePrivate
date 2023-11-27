@@ -9,12 +9,25 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitInstance {
 
+    // Create the Interceptor
+
+
     companion object {
+
+//        val chuckerInterceptor = ChuckerInterceptor.Builder(App.)
+//            .maxContentLength(250_000L)
+//            .alwaysReadResponseBody(true)
+//            .createShortcut(true)
+//            .build()
+
         val retrofit by lazy {
             val interceptor = HttpLoggingInterceptor()
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            val client = OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                //.addInterceptor(chuckerInterceptor)
+                .build()
 
             Retrofit.Builder()
                 .baseUrl(BASE_URL)

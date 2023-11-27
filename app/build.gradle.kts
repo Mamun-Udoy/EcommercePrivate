@@ -116,4 +116,7 @@ dependencies {
     val paging_version = "3.2.1"
 
     implementation("androidx.paging:paging-runtime:$paging_version")
+
+    // chucker
+    debugImplementation ("com.github.chuckerteam.chucker:library:4.0.0")
 }

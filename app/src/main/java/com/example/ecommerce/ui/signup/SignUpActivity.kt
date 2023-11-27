@@ -8,6 +8,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.ecommerce.R
+import com.example.ecommerce.data_model.UserRequest
 import com.example.ecommerce.databinding.ActivitySignUpBinding
 import com.example.ecommerce.ui.login.LoginActivity
 
@@ -27,18 +28,35 @@ class SignUpActivity : AppCompatActivity() {
 
             val userInfo = getUserInfoFromViews()
 
-            val validationResult =
-                validateCredentials(userInfo.username, userInfo.email, userInfo.password)
+            val validationResult = validateCredentials(userInfo.username, userInfo.email, userInfo.password)
 
             if(validationResult.first){
 
-                val signUpData :SignUpData =userInfo
+                viewModel.postUserInfo(getUserRequest(userInfo))
 
-                viewModel.postUserInfo(signUpData)
-
+                viewModel.registrationResult.observe(this) { isSuccess ->
+                    if (isSuccess) {
+                        // Registration successful, navigate to login activity
+                        val intent = Intent(this, LoginActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                        Toast.makeText(
+                            this,
+                            "Registration successful. Please log in.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        // Registration failed, handle accordingly
+                        Toast.makeText(
+                            this,
+                            "Registration failed. Please try again.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
 
             }
-            else{
+            else {
                 val errorMessage = validationResult.second
                 Toast.makeText(this,"$errorMessage",Toast.LENGTH_SHORT).show()
             }
@@ -51,6 +69,31 @@ class SignUpActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun getUserRequest(signUpData: SignUpData): UserRequest {
+        return UserRequest(
+            address = UserRequest.Address(
+                city = signUpData.city,
+                geolocation = UserRequest.Address.Geolocation(
+                    lat = signUpData.latitude,
+                    long = signUpData.longitude
+                ),
+                number = signUpData.number.toIntOrNull(),
+                street = signUpData.street,
+                zipcode = signUpData.zipCode
+            ),
+            email = signUpData.email,
+            name = UserRequest.Name(
+                firstname = signUpData.firstName,
+                lastname = signUpData.lastName
+            ),
+            password = signUpData.password,
+            phone = signUpData.phoneNumber,
+            username = signUpData.username
+
+
+        )
     }
 
     private fun getUserInfoFromViews(): SignUpData {
