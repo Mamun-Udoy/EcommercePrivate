@@ -34,48 +34,48 @@ class LoginActivity : AppCompatActivity() {
         } else {
             binding = ActivityLoginBinding.inflate(layoutInflater)
             setContentView(binding.root)
-        }
 
-        binding.signUp.setOnClickListener {
+            binding.signUp.setOnClickListener {
 
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        binding.login.setOnClickListener {
-
-
-            val userName = binding.userName.text.toString()
-            val userPassword = binding.userpassword.text.toString()
-
-            val validationResult = validateCredentials(userName, userPassword)
-
-            if (validationResult.first) {
-
-                viewModel.getUserInfo(userName, userPassword)
-
-                viewModel.loginResult.observe(this) { token ->
-                    if (!token.isNullOrEmpty()) {
-
-                        pref.setLoggedIn()
-
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-
-                        Toast.makeText(this, "User is Invalid", Toast.LENGTH_SHORT).show()
-
-                    }
-                }
-            } else {
-                val errorMessage = validationResult.second
-                Toast.makeText(this, "$errorMessage", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, SignUpActivity::class.java)
+                startActivity(intent)
+                finish()
             }
 
+            binding.login.setOnClickListener {
 
+
+                val userName = binding.userName.text.toString()
+                val userPassword = binding.userpassword.text.toString()
+
+                val validationResult = validateCredentials(userName, userPassword)
+
+                if (validationResult.first) {
+
+                    viewModel.getUserInfo(userName, userPassword)
+                    viewModel.loginResult.observe(this) { token ->
+                        if (!token.isNullOrEmpty()) {
+
+                            pref.setLoggedIn()
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+
+                            Toast.makeText(this, "User is Invalid", Toast.LENGTH_SHORT).show()
+
+                        }
+                    }
+                } else {
+                    val errorMessage = validationResult.second
+                    Toast.makeText(this, "$errorMessage", Toast.LENGTH_SHORT).show()
+                }
+
+
+            }
         }
+
+
 
 
     }
