@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerce.R
@@ -15,28 +18,31 @@ import com.example.ecommerce.databinding.FragmentHomeBinding
 import com.example.ecommerce.isConnectedToInternet
 import com.example.ecommerce.toProductEntity
 import com.example.ecommerce.ui.home_product_item.db.ProductDatabase
+import com.example.ecommerce.ui.home_product_item.db.entity.ProductEntity
 import com.example.ecommerce.ui.home_product_item.db.product_view_model.ProductViewModel
 import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitDataModel
 import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitViewModel
 import com.example.ecommerce.ui.home_product_item.paging.LoaderAdapter
 import com.example.ecommerce.ui.home_product_item.paging.PagingAdapter
 import com.example.ecommerce.ui.home_product_item.paging.PagingViewModel
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
-class HomeFragment : Fragment(), PagingAdapter.CacheInData {
+class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemClickCallback {
 
     private lateinit var binding: FragmentHomeBinding
 
 
-
     private val viewModel by viewModels<PagingViewModel>()
 
-    private val myAdapter: PagingAdapter by lazy { PagingAdapter(this) }
+    private val viewModel3 by viewModels<ProductViewModel>()
+
+    private val myAdapter: PagingAdapter by lazy { PagingAdapter(this,this) }
 
     private val viewModel2 by viewModels<RetrofitViewModel>()
 
-
+    val productList: ArrayList<ProductEntity> by lazy { arrayListOf() }
 
 
     private fun init() {
@@ -49,11 +55,6 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData {
         }
     }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,12 +72,9 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData {
         )
 
 
-        val internetConnection = context?.isConnectedToInternet()
-        if (internetConnection == true) {
-
+        if (context?.isConnectedToInternet() == true) {
             init()
             observer()
-            fetchData()
         }
         else{
 
@@ -88,9 +86,26 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData {
         if (context?.isConnectedToInternet() == true) {
             viewModel2.getProductInfoList()
         } else {
+            init()
+//            dbData()
+//            getData()
+
 
         }
     }
+//
+//    private fun getData() {
+//        val data = viewModel3.getProductItem(requireContext())
+//        myAdapter.updateList(data)
+//
+//    }
+//
+//    private fun dbData(): List<ProductEntity>? {
+//        val dao = ProductDatabase.getDatabase(requireContext())?.productItemDao()
+//        val data = dao?.getProductItem()
+//        return data
+//
+//    }
 
     private fun observer() {
         val pagingData = viewModel.getData().distinctUntilChanged()
@@ -105,8 +120,16 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData {
     override fun cacheData(item: RetrofitDataModel.Product?) {
         if (item == null) return
         val productItem = item.toProductEntity()
-        val dao = ProductDatabase.getDatabase(requireContext())?.productItemDao
+        val dao = ProductDatabase.getDatabase(requireContext())?.productItemDao()
         dao?.insertProductItem(productItem)
+
+    }
+
+    // Assuming you are inside your HomeFragment
+    override fun onItemClicked(item: RetrofitDataModel.Product) {
+        val bundle = Bundle()
+        bundle.putString("data_item",Gson().toJson(item))
+        requireView().findNavController().navigate(R.id.productDetails,bundle)
 
     }
 

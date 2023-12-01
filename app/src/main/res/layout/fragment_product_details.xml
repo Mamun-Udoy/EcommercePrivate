@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home_product_item.db.ProductDetailsFragment"
+    android:layout_margin="8dp"
+    android:orientation="vertical">
+
+    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+        android:id="@+id/carousel"
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+
+        app:autoPlay="true"
+        app:autoPlayDelay="3000"
+        app:autoWidthFixing="true"
+
+        app:bottomShadowAlpha="0.6"
+        app:bottomShadowHeight="64dp"
+        app:carouselBackground="#00000000"
+
+
+        app:carouselGravity="CENTER"
+        app:carouselPadding="4dp"
+
+
+        app:carouselPaddingBottom="4dp"
+        app:carouselPaddingEnd="4dp"
+        app:carouselPaddingStart="4dp"
+        app:carouselPaddingTop="4dp"
+        app:carouselType="BLOCK"
+
+
+        app:imageScaleType="centerCrop"
+        app:infiniteCarousel="true"
+
+        app:scaleOnScroll="false"
+        app:scalingFactor="0.15"
+        app:showBottomShadow="true"
+        app:showTopShadow="true"
+        app:topShadowAlpha="0.6"
+        app:topShadowHeight="32dp"
+        app:touchToPause="true" />
+
+    <TextView
+        android:id="@+id/discount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="discount:" />
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rating:" />
+
+    <TextView
+        android:id="@+id/stock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="stock:" />
+
+    <TextView
+        android:id="@+id/brand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="brand:" />
+
+    <TextView
+        android:id="@+id/categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="category:" />
+
+    <Button
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        app:icon="@drawable/ic_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkout"
+        android:text="ADD TO CART"
+        android:backgroundTint="#B11313"
+        android:layout_gravity="center"/>
+
+
+</LinearLayout>

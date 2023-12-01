@@ -4,15 +4,19 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.ecommerce.ui.check_out_item.CheckOutItem
+import com.example.ecommerce.ui.check_out_item.CheckOutItemDao
 import com.example.ecommerce.ui.home_product_item.db.dao.ProductItemDao
 import com.example.ecommerce.ui.home_product_item.db.entity.ProductEntity
 import com.example.ecommerce.ui.home_product_item.db.entity.RemoteKeyEntity
 
 
-@Database(entities = [ProductEntity::class], version = 4)
+@Database(entities = [ProductEntity::class,CheckOutItem::class], version = 6)
 abstract class ProductDatabase : RoomDatabase() {
 
-    abstract val productItemDao: ProductItemDao
+    abstract fun productItemDao(): ProductItemDao
+
+    abstract fun checkOutItemDao(): CheckOutItemDao
 
     companion object {
         @Volatile

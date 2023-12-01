@@ -1,21 +1,32 @@
 package com.example.ecommerce.ui.home_product_item.paging
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ProductItemBinding
+import com.example.ecommerce.ui.home_product_item.db.entity.ProductEntity
 import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitDataModel
 
 class PagingAdapter(
-    private val cacheInData: CacheInData
+    private val cacheInData: CacheInData, private val callback: ItemClickCallback
 ) :
     PagingDataAdapter<RetrofitDataModel.Product, PagingAdapter.MyViewHolder>(DIFF_CALLBACK) {
     class MyViewHolder(val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
     }
+
+    private val dataListUpdated: ArrayList<ProductEntity> = arrayListOf()
+
+
+
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RetrofitDataModel.Product>() {
@@ -47,6 +58,14 @@ class PagingAdapter(
                 .into(holder.binding.image)
         }
 
+
+        holder.binding.button.setOnClickListener {
+            if (item != null) {
+                callback.onItemClicked(item)
+            }
+        }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -63,4 +82,16 @@ class PagingAdapter(
     interface CacheInData {
         fun cacheData(item: RetrofitDataModel.Product?)
     }
+
+    fun updateList(items: List<ProductEntity>) {
+        dataListUpdated.clear()
+        dataListUpdated.addAll(items)
+        notifyDataSetChanged()
+    }
+
+    interface ItemClickCallback {
+        fun onItemClicked(item: RetrofitDataModel.Product)
+    }
+
+
 }

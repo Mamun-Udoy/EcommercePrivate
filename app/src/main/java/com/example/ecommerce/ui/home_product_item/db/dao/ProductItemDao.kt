@@ -1,5 +1,6 @@
 package com.example.ecommerce.ui.home_product_item.db.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -17,10 +18,14 @@ interface ProductItemDao {
      fun deleteProductItem(productEntity: ProductEntity)
 
     @Query(value = "SELECT * FROM productitem ")
-    fun readProductItem(): List<ProductEntity>?
+    fun getProductItem(): List<ProductEntity>?
+
 
     @Query("SELECT COUNT(id) FROM productitem")
     fun getProductItemsSize(): Int
+
+    @Query("SELECT * FROM productitem ")
+    fun getPagingSource(): List<ProductEntity>
 
 
 

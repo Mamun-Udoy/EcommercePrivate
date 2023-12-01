@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="androidx.core.text.HtmlCompat" />
+
         <variable
+
             name="data"
             type="com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitDataModel.Product" />
 
@@ -15,21 +19,20 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:src="@drawable/ic_shirt"
                 android:id="@+id/image"
-                android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="256dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_margin="12dp"
-                />
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_shirt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -42,67 +45,57 @@
             app:layout_constraintStart_toStartOf="@+id/constraint"
             app:layout_constraintTop_toBottomOf="@+id/constraint">
 
-            <TextView
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name:" />
-
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="price:"
-                app:layout_constraintTop_toBottomOf="@+id/name"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Description:"
-                app:layout_constraintTop_toBottomOf="@+id/price"
-                app:layout_constraintStart_toStartOf="@id/constraintLayout"
-                app:layout_constraintEnd_toEndOf="@+id/barrier" />
-
-
-            <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/barrier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:barrierDirection="left" />
-
 
             <TextView
                 android:id="@+id/productName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{data.title}"
                 android:layout_marginStart="4dp"
-                app:layout_constraintStart_toEndOf="@+id/barrier"
+                android:text="@{data.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/productPrice"
-                android:layout_width="wrap_content"
+                android:id="@+id/saveamount"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="@{String.valueOf(data.price)}"
-                app:layout_constraintStart_toEndOf="@+id/barrier"
-                app:layout_constraintTop_toBottomOf="@+id/productName"
-                app:layout_constraintBottom_toTopOf="@+id/productDescription" />
+                android:layout_marginTop="4dp"
+                android:background="#716E6E"
+                android:text="SAVE TK 400"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/productName" />
+
 
             <TextView
-                android:id="@+id/productDescription"
+                android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{data.description}"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="4dp"
-                app:layout_constraintStart_toEndOf="@+id/barrier"
-                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout" />
+                android:layout_marginTop="4dp"
+                android:text="@{HtmlCompat.fromHtml(`This is &lt;s>${data.price}&lt;/s> text in TextView.`, HtmlCompat.FROM_HTML_MODE_LEGACY)}"
+                app:layout_constraintEnd_toStartOf="@+id/discountedPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/saveamount" />
+
+            <TextView
+                android:id="@+id/discountedPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/price"
+                app:layout_constraintTop_toBottomOf="@+id/saveamount" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buy Now"
+                android:backgroundTint="#716E6E"
+                app:layout_constraintTop_toBottomOf="@+id/discountedPrice"
+                android:layout_marginTop="4dp"/>
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

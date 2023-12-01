@@ -14,6 +14,6 @@ class MyApp: Application() {
 
     companion object {
         var context: MyApp? = null
-        val dao = context?.let { ProductDatabase.getDatabase(it)?.productItemDao }
+        val dao = context?.let { ProductDatabase.getDatabase(it)?.productItemDao() }
     }
 }
