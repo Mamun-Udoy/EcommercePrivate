@@ -66,7 +66,6 @@ class CartAdapter(
             clickListener.onItemDeleted(item, position)
         }
 
-
         holder.binding.plus.setOnClickListener {
             count++
             if (count < 11)

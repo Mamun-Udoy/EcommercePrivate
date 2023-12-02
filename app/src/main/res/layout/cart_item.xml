@@ -43,7 +43,7 @@
 
                 <TextView
                     android:id="@+id/productName"
-                    android:layout_width="120dp"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
@@ -66,10 +66,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="56dp"
                     android:text="@{String.valueOf(data.discount)}"
                     app:layout_constraintStart_toEndOf="@+id/productImage"
-                    app:layout_constraintTop_toBottomOf="@+id/productName" />
+                   app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/price"
@@ -86,6 +86,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="80dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/price"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/price"
                     app:srcCompat="@drawable/ic_minus" />
@@ -95,8 +96,9 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/minus"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/price"
+                    app:layout_constraintTop_toTopOf="@+id/minus"
                     app:srcCompat="@drawable/ic_plus" />
 
                 <TextView
@@ -106,10 +108,10 @@
                     android:background="#EAE9E9"
                     android:text="0"
                     android:textAlignment="center"
-                    app:layout_constraintBottom_toBottomOf="@+id/plus"
+                    app:layout_constraintBottom_toBottomOf="@+id/minus"
                     app:layout_constraintEnd_toStartOf="@+id/plus"
                     app:layout_constraintStart_toEndOf="@+id/minus"
-                    app:layout_constraintTop_toTopOf="@+id/plus" />
+                    app:layout_constraintTop_toTopOf="@+id/minus" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
