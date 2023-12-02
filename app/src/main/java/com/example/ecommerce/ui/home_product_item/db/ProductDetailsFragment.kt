@@ -7,17 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
-import com.example.ecommerce.R
 import com.example.ecommerce.databinding.FragmentProductDetailsBinding
 import com.example.ecommerce.ui.check_out_item.CheckOutItem
 import com.example.ecommerce.ui.check_out_item.CheckOutItemInsertViewModel
 import com.example.ecommerce.ui.check_out_item.CheckOutViewModel
 import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitDataModel
-import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitViewModel
 import com.google.gson.Gson
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
@@ -98,11 +94,14 @@ class ProductDetailsFragment : Fragment() {
     private fun getCheckoutItem(item: RetrofitDataModel.Product): CheckOutItem {
         return CheckOutItem(
             itemId = item.id,
-            discount = item.discount.toFloat(),
+            discount = item.discount.toString(),
             rating = item.rating.toFloat(),
             stock = item.stock,
             brand = item.brand,
             category = item.categories,
+            thumbnail = item.thumbnail,
+            title = item.title,
+            price = item.price
         )
     }
 

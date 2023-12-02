@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.example.ecommerce.ui.check_out_item.CheckOutItem" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EAE9E9">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardElevation="20dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/productImage"
+                    android:layout_width="120dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/productName"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@{data.title}"
+                    app:layout_constraintStart_toEndOf="@+id/productImage"
+                    app:layout_constraintTop_toTopOf="@+id/productImage" />
+
+                <ImageView
+                    android:id="@+id/delete"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_delete" />
+
+                <TextView
+                    android:id="@+id/discountPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@{String.valueOf(data.discount)}"
+                    app:layout_constraintStart_toEndOf="@+id/productImage"
+                    app:layout_constraintTop_toBottomOf="@+id/productName" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@{String.valueOf(data.price)}"
+                    app:layout_constraintStart_toEndOf="@+id/productImage"
+                    app:layout_constraintTop_toBottomOf="@+id/discountPrice" />
+
+                <ImageView
+                    android:id="@+id/minus"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="80dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/price"
+                    app:srcCompat="@drawable/ic_minus" />
+
+                <ImageView
+                    android:id="@+id/plus"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/price"
+                    app:srcCompat="@drawable/ic_plus" />
+
+                <TextView
+                    android:id="@+id/count"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:background="#EAE9E9"
+                    android:text="0"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/plus"
+                    app:layout_constraintEnd_toStartOf="@+id/plus"
+                    app:layout_constraintStart_toEndOf="@+id/minus"
+                    app:layout_constraintTop_toTopOf="@+id/plus" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

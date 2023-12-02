@@ -36,7 +36,6 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
 
     private val viewModel by viewModels<PagingViewModel>()
 
-    private val viewModel3 by viewModels<ProductViewModel>()
 
     private val myAdapter: PagingAdapter by lazy { PagingAdapter(this,this) }
 

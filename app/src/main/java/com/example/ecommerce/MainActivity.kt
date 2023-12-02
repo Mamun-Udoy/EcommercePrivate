@@ -47,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.mainfragment)
 
         bottombar()
+
+        topappbar()
     }
 
     private fun getDataCount() {
@@ -68,6 +70,26 @@ class MainActivity : AppCompatActivity() {
         badge.number = size
         Log.d("badgeValue", "check badge value ${badge.number}")
         invalidateOptionsMenu()
+    }
+
+    fun topappbar() {
+
+        binding.topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.fav -> {
+//                    var navController: NavController = findNavController(R.id.mainfragment)
+//                    navController.navigateTo(R.id.checkOut)
+
+                    //val navController: NavController = findNavController(R.id.mainfragment)
+                    navController.navigate(R.id.cartFragment)
+                    true
+                }
+
+
+                else -> false
+            }
+        }
+
     }
 
 

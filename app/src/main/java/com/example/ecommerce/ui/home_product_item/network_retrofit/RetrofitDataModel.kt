@@ -20,7 +20,7 @@ data class RetrofitDataModel(
         @SerializedName("images")
         val images: List<String>? = null,
         @SerializedName("discountPercentage")
-        val discount: Double,
+        val discount: Double?,
         @SerializedName("rating")
         val rating: Double,
         @SerializedName("stock")

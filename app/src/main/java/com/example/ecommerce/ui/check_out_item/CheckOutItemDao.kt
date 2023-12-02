@@ -24,4 +24,8 @@ interface CheckOutItemDao {
     @Query("DELETE FROM CheckOutItem")
     fun deleteAllCheckoutItems()
 
+
+
+
+
 }

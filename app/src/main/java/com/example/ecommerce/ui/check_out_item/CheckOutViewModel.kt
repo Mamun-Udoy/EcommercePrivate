@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ecommerce.ui.home_product_item.db.ProductDatabase
+import com.google.gson.Gson
 
 class CheckOutViewModel: ViewModel() {
     fun insertCheckoutItem(checkOutItem: CheckOutItem, context: Context) {
@@ -23,6 +24,15 @@ class CheckOutViewModel: ViewModel() {
         val dao = ProductDatabase.getDatabase(context)?.checkOutItemDao()
         val data = dao?.getCheckoutItemsSize()
         return data
+    }
+
+    fun readCheckoutItem(context: Context): List<CheckOutItem> {
+
+        val dao = ProductDatabase.getDatabase(context)?.checkOutItemDao()
+        val data = dao?.readCheckoutItem() ?: emptyList()
+        Log.d("checkoutitem", "read checkoutitem data: data: ${Gson().toJson(data)}")
+        return data
+
     }
 
     val dbSize = MutableLiveData<Int>()
