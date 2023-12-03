@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ecommerce.R
 import com.example.ecommerce.databinding.FragmentCartBinding
 import com.example.ecommerce.ui.check_out_item.CheckOutItem
 import com.example.ecommerce.ui.check_out_item.CheckOutItemInsertViewModel
@@ -54,7 +56,12 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
         if (updatedSize != null) {
             viewModelCheckOutItemDeleteViewModel.updateDatabaseSize(updatedSize)
         }
+
+        binding.checkoutbutton.setOnClickListener {
+            requireView().findNavController().navigate(R.id.checkOutFragment)
+        }
     }
+
 
     private fun getData() {
         val data = viewModel.readCheckoutItem(requireContext())
@@ -76,6 +83,8 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
             viewModelCheckOutItemDeleteViewModel.updateDatabaseSize(updatedSize)
         }
     }
+
+
 
 //    private fun getCheckoutItem(item: RetrofitDataModel.Product): CheckOutItem {
 //        return CheckOutItem(

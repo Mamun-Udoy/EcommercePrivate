@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.payment.CardPaymentFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FAE5DF"
+        app:cardElevation="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="12dp">
+
+            <ImageView
+                android:id="@+id/mastercard"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_mastercard" />
+
+            <ImageView
+                android:id="@+id/visacard"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/mastercard"
+                app:layout_constraintStart_toEndOf="@+id/mastercard"
+                app:layout_constraintTop_toTopOf="@+id/mastercard"
+                app:srcCompat="@drawable/ic_visa" />
+
+            <ImageView
+                android:id="@+id/americanExpress"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/visacard"
+                app:layout_constraintStart_toEndOf="@+id/visacard"
+                app:layout_constraintTop_toTopOf="@+id/visacard"
+                app:srcCompat="@drawable/ic_americanexpress" />
+
+            <EditText
+                android:id="@+id/cardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:hint="Card Number"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/mastercard"
+                app:layout_constraintTop_toBottomOf="@+id/mastercard" />
+
+            <EditText
+                android:id="@+id/nameofCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:hint="Name on card"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/cardNumber"
+                app:layout_constraintStart_toStartOf="@+id/cardNumber"
+                app:layout_constraintTop_toBottomOf="@+id/cardNumber" />
+
+            <EditText
+                android:id="@+id/cardExpiration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:hint="Expiration (MM/YY)"
+                android:padding="20dp"
+                app:layout_constraintStart_toStartOf="@+id/nameofCard"
+                app:layout_constraintTop_toBottomOf="@+id/nameofCard" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:hint="CVV"
+                android:padding="20dp"
+                app:layout_constraintStart_toStartOf="@+id/cardExpiration"
+                app:layout_constraintTop_toBottomOf="@+id/cardExpiration" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF3D00"
+        android:text="Pay Now"
+        app:backgroundTint="#FF3D00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

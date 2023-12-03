@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.payment.PaymentFragment">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:backgroundTint="#FAE5DF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardElevation="20dp">
+
+        <!--        <TextView-->
+        <!--            android:layout_marginTop="8dp"-->
+        <!--            android:layout_marginStart="8dp"-->
+        <!--            android:layout_marginBottom="8dp"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="Recommended Method(s)"-->
+        <!--            android:textStyle="bold"/>-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="12dp">
+
+            <ImageView
+                android:id="@+id/mastercard"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_mastercard" />
+
+            <LinearLayout
+                android:id="@+id/cardinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@id/mastercard"
+                app:layout_constraintStart_toEndOf="@+id/mastercard"
+                app:layout_constraintTop_toTopOf="@id/mastercard">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5576 60** **** 6400"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Credit/Debit Card"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/cvv"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="28dp"
+                android:background="@color/white"
+                android:hint="CVV"
+                android:inputType="textNoSuggestions"
+                android:padding="8dp"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@id/mastercard"
+                app:layout_constraintTop_toBottomOf="@+id/cardinfo" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cvv"
+                app:layout_constraintStart_toEndOf="@+id/cvv"
+                app:layout_constraintTop_toTopOf="@+id/cvv"
+                app:srcCompat="@drawable/ic_info" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/paymentMethods"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DAD5D5"
+        android:padding="12dp"
+        android:text="Payment methods"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#FAE5DF"
+        app:layout_constraintTop_toBottomOf="@+id/paymentMethods">
+
+        <ImageView
+
+            android:id="@+id/insidecard"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_card" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Credit/Debit Card"
+            app:layout_constraintBottom_toBottomOf="@id/insidecard"
+            app:layout_constraintStart_toEndOf="@+id/insidecard"
+            app:layout_constraintTop_toTopOf="@+id/insidecard" />
+
+        <ImageView
+            android:id="@+id/rightArrow"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_right_arrow" />
+
+        <ImageView
+            android:id="@+id/visa"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/rightArrow"
+            app:layout_constraintEnd_toStartOf="@+id/rightArrow"
+            app:layout_constraintTop_toTopOf="@+id/rightArrow"
+            app:srcCompat="@drawable/ic_visa" />
+
+        <ImageView
+            android:id="@+id/mastercardlogo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/visa"
+            app:layout_constraintEnd_toStartOf="@+id/visa"
+            app:layout_constraintTop_toTopOf="@+id/visa"
+            app:srcCompat="@drawable/ic_mastercard_icon" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF3D00"
+        android:text="Pay Now"
+        app:backgroundTint="#FF3D00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

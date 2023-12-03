@@ -99,5 +99,6 @@ class CartAdapter(
 
     interface ItemClickListener {
         fun onItemDeleted(item: CheckOutItem, position: Int)
+
     }
 }
