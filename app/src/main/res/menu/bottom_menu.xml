@@ -7,11 +7,16 @@
 
         android:title="Home"
         app:showAsAction="always" />
+
     <item
-        android:id="@+id/cart"
-        android:icon="@drawable/ic_shoppingcart"
-        android:title="Cart"
-        app:showAsAction="always" />
+        android:title=""/>
+
+
+<!--    <item-->
+<!--        android:id="@+id/cart"-->
+<!--        android:icon="@drawable/ic_shoppingcart"-->
+<!--        android:title="Cart"-->
+<!--        app:showAsAction="always" />-->
 
     <item
         android:id="@+id/person"

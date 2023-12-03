@@ -28,5 +28,10 @@ interface ProductItemDao {
     fun getPagingSource(): List<ProductEntity>
 
 
+    //for deleting all item
+    @Query("DELETE FROM productitem")
+    fun deleteAllCheckoutItems()
+
+
 
 }

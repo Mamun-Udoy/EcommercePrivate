@@ -43,8 +43,6 @@ class MainActivity : AppCompatActivity() {
         getDataCount()
         setSupportActionBar(binding.topAppBar)
 
-
-
         badgeValueViewModel.dbSize.observe(this) { size ->
             Log.d("observer11","mainactivity value ${size}")
             updateBadge(size)
@@ -109,9 +107,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.cart -> {
-                    true
-                }
+
 
                 R.id.person -> {
                     true

@@ -43,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             app:layout_constraintStart_toStartOf="@+id/constraint"
-            app:layout_constraintTop_toBottomOf="@+id/constraint">
+            app:layout_constraintTop_toBottomOf="@+id/constraint"
+            app:layout_constraintBottom_toBottomOf="parent">
 
 
             <TextView
@@ -52,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:text="@{data.title}"
+                android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -74,18 +76,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="@{HtmlCompat.fromHtml(`This is &lt;s>${data.price}&lt;/s> text in TextView.`, HtmlCompat.FROM_HTML_MODE_LEGACY)}"
+                android:text="price"
                 app:layout_constraintEnd_toStartOf="@+id/discountedPrice"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/saveamount" />
+                app:layout_constraintTop_toBottomOf="@+id/saveamount"
+                />
 
             <TextView
                 android:id="@+id/discountedPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="discount price"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/price"
-                app:layout_constraintTop_toBottomOf="@+id/saveamount" />
+               app:layout_constraintTop_toTopOf="@+id/price"
+                app:layout_constraintBottom_toBottomOf="@+id/price"/>
 
             <Button
 
@@ -93,9 +98,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:backgroundTint="#252525"
                 android:text="Buy Now"
-                app:layout_constraintTop_toBottomOf="@+id/discountedPrice" />
+                app:layout_constraintTop_toBottomOf="@+id/discountedPrice"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

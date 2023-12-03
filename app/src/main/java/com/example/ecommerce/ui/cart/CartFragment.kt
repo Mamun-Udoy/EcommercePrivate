@@ -86,19 +86,6 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
 
 
 
-//    private fun getCheckoutItem(item: RetrofitDataModel.Product): CheckOutItem {
-//        return CheckOutItem(
-//            itemId = item.id,
-//            discount = item.discount.toString().toDouble(),
-//            rating = item.rating.toString().toFloat(),
-//            stock = item.stock,
-//            brand = item.brand,
-//            category = item.categories,
-//            title = item.title
-//
-//
-//        )
-//    }
 
 
 }

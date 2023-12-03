@@ -44,3 +44,20 @@ fun RetrofitDataModel.Product.toProductEntity(): ProductEntity {
     )
 
 }
+
+fun ProductEntity.toRetrofitDataModel(): RetrofitDataModel.Product {
+    return RetrofitDataModel.Product(
+        id = id.toString(),
+        brand = brand,
+        description = description,
+        stock = stock?:0,
+        categories = category,
+        rating = rating?:0.0,
+        discount = discountPercentage,
+        images = null,
+        price = price,
+        thumbnail = thumbnail,
+        title = title
+    )
+
+}

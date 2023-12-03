@@ -1,5 +1,6 @@
 package com.example.ecommerce.ui.home_product_item.paging
 
+import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -49,6 +50,11 @@ class PagingAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = getItem(position)
         holder.binding.data = item
+
+        holder.binding.price.text = item?.price.toString()
+        holder.binding.price.paintFlags = holder.binding.price.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+
+        holder.binding.discountedPrice.text =item?.discount.toString()
 
         cacheInData.cacheData(item)
 

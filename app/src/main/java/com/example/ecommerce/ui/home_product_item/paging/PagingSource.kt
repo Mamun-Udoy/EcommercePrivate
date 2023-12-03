@@ -16,10 +16,12 @@ class PagingSource : PagingSource<Int, RetrofitDataModel.Product>() {
                 ?: state.closestPageToPosition(it)?.nextKey?.minus(1)
         }
     }
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RetrofitDataModel.Product> {
         try {
             val position = params.key ?: 1
             val offset = if (params.key != null) ((position - 1) * NETWORK_PAGE_SIZE) + 5 else NETWORK_PAGE_SIZE
+
             Log.d("offset_db", "load: pos: $offset")
             val response = RetrofitInstance.api.getProductData(limit = offset)
 

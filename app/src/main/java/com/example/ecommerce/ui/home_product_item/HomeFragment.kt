@@ -17,8 +17,10 @@ import com.example.ecommerce.R
 import com.example.ecommerce.databinding.FragmentHomeBinding
 import com.example.ecommerce.isConnectedToInternet
 import com.example.ecommerce.toProductEntity
+import com.example.ecommerce.toRetrofitDataModel
 import com.example.ecommerce.ui.home_product_item.db.ProductDatabase
 import com.example.ecommerce.ui.home_product_item.db.entity.ProductEntity
+import com.example.ecommerce.ui.home_product_item.db.product_offline_adapter.ProductOfflineAdapter
 import com.example.ecommerce.ui.home_product_item.db.product_view_model.ProductViewModel
 import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitDataModel
 import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitViewModel
@@ -37,9 +39,13 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
     private val viewModel by viewModels<PagingViewModel>()
 
 
-    private val myAdapter: PagingAdapter by lazy { PagingAdapter(this,this) }
+    private val myAdapter: PagingAdapter by lazy { PagingAdapter(this, this) }
+
+    private lateinit var offlineAdapter: ProductOfflineAdapter
 
     private val viewModel2 by viewModels<RetrofitViewModel>()
+
+    private val productViewModel by viewModels<ProductViewModel>()
 
     val productList: ArrayList<ProductEntity> by lazy { arrayListOf() }
 
@@ -52,6 +58,10 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
                 footer = LoaderAdapter()
             )
         }
+    }
+
+    private fun init2() {
+
     }
 
 
@@ -72,39 +82,33 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
 
 
         if (context?.isConnectedToInternet() == true) {
+
+            productViewModel.deleteAllCheckoutItems(
+                context = requireContext()
+            )
             init()
             observer()
-        }
-        else{
-
-        }
-
-    }
-
-    private fun fetchData() {
-        if (context?.isConnectedToInternet() == true) {
-            viewModel2.getProductInfoList()
         } else {
-            init()
-//            dbData()
-//            getData()
+            //showing product item showing in offline
+            val dao = ProductDatabase.getDatabase(requireContext())?.productItemDao()
+            val data = dao?.getProductItem() ?: emptyList()
+            init2()
 
+            val dataList = data.map {
+                it.toRetrofitDataModel()
+            }
+
+            Log.d("oofline_data_size", "onViewCreated: data: ${dataList.size}")
+
+            offlineAdapter = ProductOfflineAdapter(ArrayList(dataList))
+            binding.productItemRecyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
+            binding.productItemRecyclerview.adapter = offlineAdapter
 
         }
+
     }
-//
-//    private fun getData() {
-//        val data = viewModel3.getProductItem(requireContext())
-//        myAdapter.updateList(data)
-//
-//    }
-//
-//    private fun dbData(): List<ProductEntity>? {
-//        val dao = ProductDatabase.getDatabase(requireContext())?.productItemDao()
-//        val data = dao?.getProductItem()
-//        return data
-//
-//    }
+
+
 
     private fun observer() {
         val pagingData = viewModel.getData().distinctUntilChanged()
@@ -127,8 +131,8 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
     // Assuming you are inside your HomeFragment
     override fun onItemClicked(item: RetrofitDataModel.Product) {
         val bundle = Bundle()
-        bundle.putString("data_item",Gson().toJson(item))
-        requireView().findNavController().navigate(R.id.productDetails,bundle)
+        bundle.putString("data_item", Gson().toJson(item))
+        requireView().findNavController().navigate(R.id.productDetails, bundle)
 
     }
 

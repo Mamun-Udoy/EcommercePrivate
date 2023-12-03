@@ -19,13 +19,10 @@ class CartAdapter(
 ) :
     RecyclerView.Adapter<CartAdapter.MyViewHolder>() {
 
-//    val cartItemUpdated: ArrayList<ProductEntity> = arrayListOf()
 
     var cartItemUpdated: MutableList<CheckOutItem> = mutableListOf()
 
-    init {
-        cartItemUpdated.addAll(cartItem)
-    }
+
 
     inner class MyViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root)
 

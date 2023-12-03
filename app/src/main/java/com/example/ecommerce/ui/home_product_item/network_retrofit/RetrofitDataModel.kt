@@ -12,7 +12,7 @@ data class RetrofitDataModel(
         @SerializedName("description")
         val description: String?,
         @SerializedName("price")
-        val price: Int?,
+        var price: Int?,
         @SerializedName("thumbnail")
         val thumbnail: String?,
         @SerializedName("title")
