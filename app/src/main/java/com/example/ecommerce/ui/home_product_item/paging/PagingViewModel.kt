@@ -4,12 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.example.navifationview.paging.PagingSource
 
-class PagingViewModel:ViewModel() {
-    fun getData() = androidx.paging.Pager(
-        config = PagingConfig(pageSize = 1, maxSize = 5),
-        pagingSourceFactory = { PagingSource() }
+class PagingViewModel : ViewModel() {
+    fun getData(category: String = "") = androidx.paging.Pager(
+        config = PagingConfig(pageSize =5, maxSize = 25),
+        pagingSourceFactory = { PagingSource(category) }
     )
         .flow
         .cachedIn(viewModelScope)

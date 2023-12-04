@@ -5,8 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "CheckOutItem")
 data class CheckOutItem(
-    @PrimaryKey(autoGenerate = true) var id: Long = 0,
-
+    @PrimaryKey(autoGenerate = false) var id: Long = 0,
     var itemId: String,
     var title: String? = null,
     var discount: String? = null,
@@ -17,4 +16,5 @@ data class CheckOutItem(
     var thumbnail: String? = null,
     var price: Int? = null
 )
+
 

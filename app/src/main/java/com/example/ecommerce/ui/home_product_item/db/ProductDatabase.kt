@@ -11,7 +11,7 @@ import com.example.ecommerce.ui.home_product_item.db.entity.ProductEntity
 import com.example.ecommerce.ui.home_product_item.db.entity.RemoteKeyEntity
 
 
-@Database(entities = [ProductEntity::class,CheckOutItem::class], version = 8)
+@Database(entities = [ProductEntity::class,CheckOutItem::class], version = 11)
 abstract class ProductDatabase : RoomDatabase() {
 
     abstract fun productItemDao(): ProductItemDao

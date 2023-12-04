@@ -76,6 +76,7 @@ class ProductDetailsFragment : Fragment() {
 
             Toast.makeText(context, "clicked checkout", Toast.LENGTH_SHORT).show()
 
+            Log.d("id_test", "onViewCreated: id: ${dataItem.id}")
             //inserting checkout item into database
             viewModel.insertCheckoutItem(
                 checkOutItem = getCheckoutItem(dataItem),
@@ -91,8 +92,10 @@ class ProductDetailsFragment : Fragment() {
 
     }
 
+
     private fun getCheckoutItem(item: RetrofitDataModel.Product): CheckOutItem {
         return CheckOutItem(
+            id = item.id.toLong(),
             itemId = item.id,
             discount = item.discount.toString(),
             rating = item.rating.toFloat(),

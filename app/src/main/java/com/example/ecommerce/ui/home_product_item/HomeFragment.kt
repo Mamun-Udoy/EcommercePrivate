@@ -6,13 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerce.R
 import com.example.ecommerce.databinding.FragmentHomeBinding
 import com.example.ecommerce.isConnectedToInternet
@@ -60,9 +58,6 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
         }
     }
 
-    private fun init2() {
-
-    }
 
 
     override fun onCreateView(
@@ -79,20 +74,36 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
             "internet_",
             "onViewCreated: isInternetAvailable: ${context?.isConnectedToInternet()}"
         )
+        // this is for spinner adapter
+        val categories = resources.getStringArray(R.array.categories)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, categories)
+        binding.autoCompleteTextView.setAdapter(arrayAdapter)
+        var selectedValue = "default"
+        binding.autoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
+            selectedValue = parent.getItemAtPosition(position).toString().lowercase()
+            fetchData(selectedValue)
+            Log.d("spinner_value", "print the string ${selectedValue}")
+
+            // Now you have the selected value, and you can store it or perform any action
+            // For example, you can pass it to your interface if you are using one
+//            spinnerItemSelectedListener?.onItemSelected(selectedValue)
+        }
+
+
+
 
 
         if (context?.isConnectedToInternet() == true) {
 
-            productViewModel.deleteAllCheckoutItems(
-                context = requireContext()
-            )
+            productViewModel.deleteAllCheckoutItems(context = requireContext())
             init()
-            observer()
+            fetchData()
+
         } else {
             //showing product item showing in offline
             val dao = ProductDatabase.getDatabase(requireContext())?.productItemDao()
             val data = dao?.getProductItem() ?: emptyList()
-            init2()
+     
 
             val dataList = data.map {
                 it.toRetrofitDataModel()
@@ -109,10 +120,8 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
     }
 
 
-
-    private fun observer() {
-        val pagingData = viewModel.getData().distinctUntilChanged()
-
+    private fun fetchData(category: String = "") {
+        val pagingData = viewModel.getData(category).distinctUntilChanged()
         lifecycleScope.launch {
             pagingData.collect {
                 myAdapter.submitData(it)

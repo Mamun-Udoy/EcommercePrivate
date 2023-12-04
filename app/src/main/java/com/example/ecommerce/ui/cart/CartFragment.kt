@@ -60,6 +60,10 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
         binding.checkoutbutton.setOnClickListener {
             requireView().findNavController().navigate(R.id.checkOutFragment)
         }
+
+
+
+
     }
 
 
@@ -82,10 +86,10 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
         if (updatedSize != null) {
             viewModelCheckOutItemDeleteViewModel.updateDatabaseSize(updatedSize)
         }
+        if (cartAdapter.itemCount<1){
+            requireView().findNavController().navigate(R.id.homeFragment)
+        }
     }
-
-
-
 
 
 }

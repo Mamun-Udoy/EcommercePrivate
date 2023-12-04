@@ -1,4 +1,4 @@
-package com.example.navifationview.paging
+package com.example.ecommerce.ui.home_product_item.paging
 
 import android.util.Log
 import androidx.paging.PagingSource
@@ -7,8 +7,9 @@ import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitDataM
 import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitInstance
 
 
-const val NETWORK_PAGE_SIZE = 5
-class PagingSource : PagingSource<Int, RetrofitDataModel.Product>() {
+const val NETWORK_PAGE_SIZE = 10
+
+class PagingSource(private val category: String) : PagingSource<Int, RetrofitDataModel.Product>() {
 
     override fun getRefreshKey(state: PagingState<Int, RetrofitDataModel.Product>): Int? {
         return state.anchorPosition?.let {
@@ -20,10 +21,12 @@ class PagingSource : PagingSource<Int, RetrofitDataModel.Product>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RetrofitDataModel.Product> {
         try {
             val position = params.key ?: 1
-            val offset = if (params.key != null) ((position - 1) * NETWORK_PAGE_SIZE) + 5 else NETWORK_PAGE_SIZE
+            val offset = if (params.key != null) ((position - 1) * NETWORK_PAGE_SIZE) + 10 else NETWORK_PAGE_SIZE
 
             Log.d("offset_db", "load: pos: $offset")
-            val response = RetrofitInstance.api.getProductData(limit = offset)
+            val response = if (category.isEmpty() || category.lowercase() == "default")
+                                RetrofitInstance.api.getProductData(limit = offset)
+                            else RetrofitInstance.api.getCategoryProductData(category)
 
             if (response.isSuccessful) {
                 val data = response.body()?.products ?: emptyList()
