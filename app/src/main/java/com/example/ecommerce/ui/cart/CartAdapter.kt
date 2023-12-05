@@ -1,6 +1,7 @@
 package com.example.ecommerce.ui.cart
 
 import android.content.res.Resources
+import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -23,7 +24,6 @@ class CartAdapter(
     var cartItemUpdated: MutableList<CheckOutItem> = mutableListOf()
 
 
-
     inner class MyViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -36,6 +36,21 @@ class CartAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = cartItemUpdated[position]
         holder.binding.data = item
+
+        var discount = item.discount
+
+
+        var save = discount?.let { item.price?.toFloat()?.div(100)?.times(discount.toFloat()) }
+
+
+        holder.binding.price.text = "Price " + item?.price.toString()
+
+
+        var discountedPrice = save?.let { item?.price?.minus(it) }
+
+        holder.binding.discountPrice.text =
+            "Discounted Price " + formatToTwoDecimalPlaces(discountedPrice?.toFloat()).toString()
+
 
         // this is done for add margin top for the first item in recyclerview and add margin bottom for the last item for recyclerview
         if (position == 0) {
@@ -51,10 +66,7 @@ class CartAdapter(
             holder.itemView.layoutParams = layoutParams
         }
 
-//        holder.binding.productName.text = item.title
-//
-//        holder.binding.price.text = item.price.toString()
-//        holder.binding.discountPrice.text = item.discount.toString()
+
         Glide.with(holder.binding.productImage.context)
             .load("${item.thumbnail}")
             .into(holder.binding.productImage)
@@ -92,6 +104,12 @@ class CartAdapter(
 
     override fun getItemCount(): Int {
         return cartItemUpdated.size
+    }
+
+    fun formatToTwoDecimalPlaces(value: Float?): String? {
+        return value?.let {
+            String.format("%.2f", it)
+        }
     }
 
     interface ItemClickListener {

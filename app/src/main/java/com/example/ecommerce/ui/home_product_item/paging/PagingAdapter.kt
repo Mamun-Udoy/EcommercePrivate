@@ -17,7 +17,7 @@ import com.example.ecommerce.ui.home_product_item.db.entity.ProductEntity
 import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitDataModel
 
 class PagingAdapter(
-    private val cacheInData: CacheInData, private val callback: ItemClickCallback
+    private val cacheInData: CacheInData, private val callback: ItemClickCallback ,private val wishListClick : WishListCallBack
 ) :
     PagingDataAdapter<RetrofitDataModel.Product, PagingAdapter.MyViewHolder>(DIFF_CALLBACK) {
     class MyViewHolder(val binding: ProductItemBinding) :
@@ -25,8 +25,6 @@ class PagingAdapter(
     }
 
     private val dataListUpdated: ArrayList<ProductEntity> = arrayListOf()
-
-
 
 
     companion object {
@@ -51,10 +49,21 @@ class PagingAdapter(
         val item = getItem(position)
         holder.binding.data = item
 
-        holder.binding.price.text = item?.price.toString()
-        holder.binding.price.paintFlags = holder.binding.price.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        var discount = item?.discount
 
-        holder.binding.discountedPrice.text =item?.discount.toString()
+
+        var save = discount?.let { item?.price?.toFloat()?.div(100)?.times(discount) }
+        holder.binding.saveamount.text =
+            "Save Amount " + formatToTwoDecimalPlaces(save?.toFloat()).toString()
+
+        holder.binding.price.text = item?.price.toString()
+        holder.binding.price.paintFlags =
+            holder.binding.price.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+
+        var discountedPrice = save?.let { item?.price?.minus(it) }
+
+        holder.binding.discountedPrice.text =
+            "Discounted Price " + formatToTwoDecimalPlaces(discountedPrice?.toFloat()).toString()
 
         cacheInData.cacheData(item)
 
@@ -69,6 +78,13 @@ class PagingAdapter(
             if (item != null) {
                 callback.onItemClicked(item)
             }
+        }
+
+        holder.binding.wishlist.setOnClickListener {
+            if (item != null) {
+                wishListClick.wishListClicked(item)
+            }
+
         }
 
 
@@ -89,15 +105,29 @@ class PagingAdapter(
         fun cacheData(item: RetrofitDataModel.Product?)
     }
 
+    fun formatToTwoDecimalPlaces(value: Float?): String? {
+        return value?.let {
+            String.format("%.2f", it)
+        }
+    }
+
+
     fun updateList(items: List<ProductEntity>) {
         dataListUpdated.clear()
         dataListUpdated.addAll(items)
         notifyDataSetChanged()
     }
 
+
     interface ItemClickCallback {
         fun onItemClicked(item: RetrofitDataModel.Product)
     }
+
+    interface WishListCallBack{
+
+        fun wishListClicked(item: RetrofitDataModel.Product)
+    }
+
 
 
 }

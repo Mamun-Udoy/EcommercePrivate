@@ -42,9 +42,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/constraint"
-            app:layout_constraintTop_toBottomOf="@+id/constraint"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/constraint">
+
+            <ImageView
+                android:id="@+id/wishlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat = "@drawable/ic_favourite"
+                app:layout_constraintStart_toEndOf="@+id/productName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/productName"
+                app:layout_constraintBottom_toBottomOf="@id/productName"
+                android:layout_marginStart="20dp"
+              />
 
 
             <TextView
@@ -52,8 +64,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="@{data.title}"
                 android:maxLines="1"
+                android:text="@{data.title}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -70,30 +82,48 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/productName" />
 
-
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="price"
-                app:layout_constraintEnd_toStartOf="@+id/discountedPrice"
+            <LinearLayout
+                android:id="@+id/priceLayout"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/saveamount"
-                />
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/priceText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Price: "
+                    app:layout_constraintEnd_toStartOf="@+id/price"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/saveamount" />
+
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="price"
+                    app:layout_constraintStart_toEndOf="@+id/priceText"
+                    app:layout_constraintTop_toBottomOf="@+id/saveamount" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/discountedPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="discount price"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/price"
-               app:layout_constraintTop_toTopOf="@+id/price"
-                app:layout_constraintBottom_toBottomOf="@+id/price"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/priceLayout" />
 
             <Button
-
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,10 +131,8 @@
                 android:layout_marginBottom="4dp"
                 android:backgroundTint="#252525"
                 android:text="Buy Now"
-                app:layout_constraintTop_toBottomOf="@+id/discountedPrice"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/discountedPrice" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

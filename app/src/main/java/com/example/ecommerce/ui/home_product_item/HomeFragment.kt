@@ -29,7 +29,7 @@ import com.google.gson.Gson
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
-class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemClickCallback {
+class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemClickCallback, PagingAdapter.WishListCallBack {
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -37,7 +37,7 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
     private val viewModel by viewModels<PagingViewModel>()
 
 
-    private val myAdapter: PagingAdapter by lazy { PagingAdapter(this, this) }
+    private val myAdapter: PagingAdapter by lazy { PagingAdapter(this, this, this) }
 
     private lateinit var offlineAdapter: ProductOfflineAdapter
 
@@ -74,20 +74,21 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
             "internet_",
             "onViewCreated: isInternetAvailable: ${context?.isConnectedToInternet()}"
         )
-        // this is for spinner adapter
-        val categories = resources.getStringArray(R.array.categories)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, categories)
-        binding.autoCompleteTextView.setAdapter(arrayAdapter)
-        var selectedValue = "default"
-        binding.autoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
-            selectedValue = parent.getItemAtPosition(position).toString().lowercase()
-            fetchData(selectedValue)
-            Log.d("spinner_value", "print the string ${selectedValue}")
-
-            // Now you have the selected value, and you can store it or perform any action
-            // For example, you can pass it to your interface if you are using one
-//            spinnerItemSelectedListener?.onItemSelected(selectedValue)
-        }
+//        // this is for spinner adapter
+//        val categories = resources.getStringArray(R.array.categories)
+//        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, categories)
+//        binding.autoCompleteTextView.setAdapter(arrayAdapter)
+//        var selectedValue = "default"
+//
+//        binding.autoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
+//            selectedValue = parent.getItemAtPosition(position).toString().lowercase()
+//            fetchData(selectedValue)
+//            Log.d("spinner_value", "print the string ${selectedValue}")
+//
+//            // Now you have the selected value, and you can store it or perform any action
+//            // For example, you can pass it to your interface if you are using one
+////            spinnerItemSelectedListener?.onItemSelected(selectedValue)
+//        }
 
 
 
@@ -119,6 +120,31 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        // this is for spinner adapter
+        binding.autoCompleteTextView.setText("Chose Your " +
+                "Item")
+        val categories = resources.getStringArray(R.array.categories)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, categories)
+        binding.autoCompleteTextView.setAdapter(arrayAdapter)
+        var selectedValue = "default"
+
+
+
+        binding.autoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
+            selectedValue = parent.getItemAtPosition(position).toString().lowercase()
+            fetchData(selectedValue)
+            Log.d("spinner_value", "print the string ${selectedValue}")
+
+            // Now you have the selected value, and you can store it or perform any action
+            // For example, you can pass it to your interface if you are using one
+//            spinnerItemSelectedListener?.onItemSelected(selectedValue)
+        }
+
+
+    }
+
 
     private fun fetchData(category: String = "") {
         val pagingData = viewModel.getData(category).distinctUntilChanged()
@@ -143,6 +169,11 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
         bundle.putString("data_item", Gson().toJson(item))
         requireView().findNavController().navigate(R.id.productDetails, bundle)
 
+    }
+
+    override fun wishListClicked(item: RetrofitDataModel.Product) {
+
+        Log.d("wishlistclicked", "wishListClicked: favorite ")
     }
 
 

@@ -122,12 +122,12 @@
 
     <Button
         android:id="@+id/login"
+        style="@style/Widget.Material3.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="LOGIN"
         android:textSize="20dp"
-        style="@style/Widget.Material3.Button"
         app:backgroundTint="#FF3D00"
         app:layout_constraintEnd_toEndOf="@+id/username"
         app:layout_constraintStart_toStartOf="@+id/username"
