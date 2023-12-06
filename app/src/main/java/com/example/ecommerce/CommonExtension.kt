@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.room.PrimaryKey
 import com.example.ecommerce.ui.home_product_item.db.entity.ProductEntity
 import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitDataModel
+import com.example.ecommerce.ui.wishlist.WishListEntity
 import com.google.gson.Gson
 
 fun NavController.navigateTo(destinationResId: Int) {
@@ -41,6 +42,23 @@ fun RetrofitDataModel.Product.toProductEntity(): ProductEntity {
         price = price,
         thumbnail = thumbnail,
         title = title
+    )
+
+}
+
+fun RetrofitDataModel.Product.toWishListEntity(): WishListEntity {
+    return WishListEntity(
+        id = id.toLong(),
+        brand = brand,
+        description = description,
+        stock = stock,
+        category = categories,
+        rating = rating.toFloat(),
+        discount = discount.toString(),
+        price = price,
+        thumbnail = thumbnail,
+        title = title.toString()
+
     )
 
 }

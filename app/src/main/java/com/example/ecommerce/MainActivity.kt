@@ -110,6 +110,8 @@ class MainActivity : AppCompatActivity() {
 
 
                 R.id.person -> {
+
+                    navController.navigate(R.id.userAccount)
                     true
                 }
                 else -> false

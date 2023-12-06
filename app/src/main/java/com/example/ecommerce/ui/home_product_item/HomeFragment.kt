@@ -16,6 +16,7 @@ import com.example.ecommerce.databinding.FragmentHomeBinding
 import com.example.ecommerce.isConnectedToInternet
 import com.example.ecommerce.toProductEntity
 import com.example.ecommerce.toRetrofitDataModel
+import com.example.ecommerce.toWishListEntity
 import com.example.ecommerce.ui.home_product_item.db.ProductDatabase
 import com.example.ecommerce.ui.home_product_item.db.entity.ProductEntity
 import com.example.ecommerce.ui.home_product_item.db.product_offline_adapter.ProductOfflineAdapter
@@ -25,6 +26,7 @@ import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitViewM
 import com.example.ecommerce.ui.home_product_item.paging.LoaderAdapter
 import com.example.ecommerce.ui.home_product_item.paging.PagingAdapter
 import com.example.ecommerce.ui.home_product_item.paging.PagingViewModel
+import com.example.ecommerce.ui.wishlist.WishListViewModel
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -42,6 +44,8 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
     private lateinit var offlineAdapter: ProductOfflineAdapter
 
     private val viewModel2 by viewModels<RetrofitViewModel>()
+
+    private val wishListViewModel by viewModels<WishListViewModel>()
 
     private val productViewModel by viewModels<ProductViewModel>()
 
@@ -174,6 +178,10 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
     override fun wishListClicked(item: RetrofitDataModel.Product) {
 
         Log.d("wishlistclicked", "wishListClicked: favorite ")
+
+        val wishListItem = item.toWishListEntity()
+        val dao = ProductDatabase.getDatabase(requireContext())?.wishListItemDao()
+        dao?.insertWishListItem(wishListItem)
     }
 
 

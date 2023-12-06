@@ -9,14 +9,21 @@ import com.example.ecommerce.ui.check_out_item.CheckOutItemDao
 import com.example.ecommerce.ui.home_product_item.db.dao.ProductItemDao
 import com.example.ecommerce.ui.home_product_item.db.entity.ProductEntity
 import com.example.ecommerce.ui.home_product_item.db.entity.RemoteKeyEntity
+import com.example.ecommerce.ui.wishlist.WishListEntity
+import com.example.ecommerce.ui.wishlist.WishListItemDao
 
 
-@Database(entities = [ProductEntity::class,CheckOutItem::class], version = 11)
+@Database(
+    entities = [ProductEntity::class, CheckOutItem::class, WishListEntity::class],
+    version = 13
+)
 abstract class ProductDatabase : RoomDatabase() {
 
     abstract fun productItemDao(): ProductItemDao
 
     abstract fun checkOutItemDao(): CheckOutItemDao
+
+    abstract fun wishListItemDao(): WishListItemDao
 
     companion object {
         @Volatile
