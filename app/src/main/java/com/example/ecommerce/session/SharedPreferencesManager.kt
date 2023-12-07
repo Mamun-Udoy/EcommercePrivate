@@ -25,4 +25,8 @@ class SharedPreferencesManager(private val context: Context) {
         return sharedPreferences.getBoolean(IS_LOGGED_IN, false)
     }
 
+    fun clearLoggedIn() {
+        sharedPreferences.edit().remove(IS_LOGGED_IN).apply()
+    }
+
 }

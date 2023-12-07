@@ -4,12 +4,14 @@ import android.content.Context
 import android.net.ConnectivityManager
 import androidx.navigation.NavController
 import androidx.room.PrimaryKey
+import com.example.ecommerce.ui.check_out_item.CheckOutItem
 import com.example.ecommerce.ui.home_product_item.db.entity.ProductEntity
 import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitDataModel
 import com.example.ecommerce.ui.wishlist.WishListEntity
 import com.google.gson.Gson
 
 fun NavController.navigateTo(destinationResId: Int) {
+
     if (currentDestination == null) {
         navigate(destinationResId)
     } else {
@@ -44,6 +46,20 @@ fun RetrofitDataModel.Product.toProductEntity(): ProductEntity {
         title = title
     )
 
+}
+
+fun WishListEntity.toCheckOutItem():CheckOutItem{
+    return CheckOutItem(
+        id = id.toLong(),
+        brand = brand,
+        stock = stock,
+        rating = rating?.toFloat(),
+        discount = discount?.toString(),
+        price = price,
+        thumbnail = thumbnail,
+        title = title.toString(),
+        itemId = ""
+    )
 }
 
 fun RetrofitDataModel.Product.toWishListEntity(): WishListEntity {

@@ -103,11 +103,9 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
-                    navController.navigate(R.id.homeFragment)
+                    navController.navigateTo(R.id.homeFragment)
                     true
                 }
-
-
 
                 R.id.person -> {
 

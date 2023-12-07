@@ -179,6 +179,8 @@ class HomeFragment : Fragment(), PagingAdapter.CacheInData, PagingAdapter.ItemCl
 
         Log.d("wishlistclicked", "wishListClicked: favorite ")
 
+
+
         val wishListItem = item.toWishListEntity()
         val dao = ProductDatabase.getDatabase(requireContext())?.wishListItemDao()
         dao?.insertWishListItem(wishListItem)

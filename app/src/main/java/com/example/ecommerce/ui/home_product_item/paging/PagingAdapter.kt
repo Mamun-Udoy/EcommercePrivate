@@ -15,6 +15,7 @@ import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ProductItemBinding
 import com.example.ecommerce.ui.home_product_item.db.entity.ProductEntity
 import com.example.ecommerce.ui.home_product_item.network_retrofit.RetrofitDataModel
+import org.imaginativeworld.whynotimagecarousel.utils.setImage
 
 class PagingAdapter(
     private val cacheInData: CacheInData, private val callback: ItemClickCallback ,private val wishListClick : WishListCallBack
@@ -83,6 +84,7 @@ class PagingAdapter(
         holder.binding.wishlist.setOnClickListener {
             if (item != null) {
                 wishListClick.wishListClicked(item)
+                holder.binding.wishlist.setImageResource(R.drawable.ic_color_favourite)
             }
 
         }

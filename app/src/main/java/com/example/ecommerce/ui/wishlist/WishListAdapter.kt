@@ -12,7 +12,7 @@ import com.example.ecommerce.ui.check_out_item.CheckOutItem
 
 import kotlin.math.roundToInt
 
-class WishListAdapter(wishListitem: ArrayList<WishListEntity>, private val clickListener: WishListAdapter.ItemClickListener) :
+class WishListAdapter(wishListitem: ArrayList<WishListEntity>, private val clickListener: WishListAdapter.ItemClickListener, private val addtocart: WishListAdapter.AddtoCart) :
     RecyclerView.Adapter<WishListAdapter.MyViewHolder>() {
 
 
@@ -72,6 +72,10 @@ class WishListAdapter(wishListitem: ArrayList<WishListEntity>, private val click
             clickListener.onItemDeleted(item, position)
         }
 
+        holder.binding.addcart.setOnClickListener {
+            addtocart.onAddToCart(item,position)
+        }
+
     }
 
     fun updateList(items: List<WishListEntity>) {
@@ -97,5 +101,9 @@ class WishListAdapter(wishListitem: ArrayList<WishListEntity>, private val click
     interface ItemClickListener {
         fun onItemDeleted(item: WishListEntity, position: Int)
 
+    }
+
+    interface  AddtoCart{
+        fun onAddToCart(item: WishListEntity, position: Int)
     }
 }

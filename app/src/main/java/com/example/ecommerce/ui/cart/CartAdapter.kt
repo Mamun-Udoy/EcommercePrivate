@@ -32,18 +32,28 @@ class CartAdapter(
         return MyViewHolder(binding)
     }
 
-    var count = 0;
+    var count = 1;
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = cartItemUpdated[position]
         holder.binding.data = item
 
         var discount = item.discount
 
+        var price = item.price
+
 
         var save = discount?.let { item.price?.toFloat()?.div(100)?.times(discount.toFloat()) }
 
 
         holder.binding.price.text = "Price " + item?.price.toString()
+
+        fun price(save: Float) {
+            var discountedPrice = save?.let { item?.price?.minus(it) }
+        }
+
+        fun discountedPrice(save: Float) {
+            var save = discount?.let { item.price?.toFloat()?.div(100)?.times(discount.toFloat()) }
+        }
 
 
         var discountedPrice = save?.let { item?.price?.minus(it) }
@@ -75,16 +85,37 @@ class CartAdapter(
             clickListener.onItemDeleted(item, position)
         }
 
+        holder.binding.total.text = "Total " + "${formatToTwoDecimalPlaces(discountedPrice)}"
+
+
+
+        fun total(value: Int) {
+            holder.binding.total.text = "Total $value"
+        }
+
+        var disPrice =discountedPrice
         holder.binding.plus.setOnClickListener {
             count++
-            if (count < 11)
+
+            if (count < 11){
+                if(disPrice!=null){
+                    disPrice += discountedPrice!!
+                    total(disPrice.toInt())
+                }
                 holder.binding.count.text = count.toString()
+            }
             else count--
         }
         holder.binding.minus.setOnClickListener {
+
             count--
-            if (count > 0)
+            if (count > 0){
+                if(disPrice!=null){
+                    disPrice -= discountedPrice!!
+                    total(disPrice.toInt())
+                }
                 holder.binding.count.text = count.toString()
+            }
             else count++
         }
     }

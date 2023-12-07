@@ -99,7 +99,7 @@ class ProductDetailsFragment : Fragment() {
         return CheckOutItem(
             id = item.id.toLong(),
             itemId = item.id,
-            discount = item.discount.toString(),
+            discount = item.discount?.toString(),
             rating = item.rating.toFloat(),
             stock = item.stock,
             brand = item.brand,

@@ -6,24 +6,36 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ecommerce.R
 import com.example.ecommerce.databinding.FragmentWishListBinding
-import com.example.ecommerce.ui.cart.CartAdapter
-import com.example.ecommerce.ui.check_out_item.CheckOutItem
+import com.example.ecommerce.toCheckOutItem
+import com.example.ecommerce.ui.check_out_item.CheckOutItemInsertViewModel
 import com.example.ecommerce.ui.check_out_item.CheckOutViewModel
 
 
-class WishListFragment : Fragment(), WishListAdapter.ItemClickListener {
+
+class WishListFragment : Fragment(), WishListAdapter.ItemClickListener, WishListAdapter.AddtoCart {
 
 
     private lateinit var binding: FragmentWishListBinding
 
-    private val wishListAdapter: WishListAdapter by lazy { WishListAdapter(arrayListOf(), this) }
+    private val wishListAdapter: WishListAdapter by lazy {
+        WishListAdapter(
+            arrayListOf(),
+            this,
+            this
+        )
+    }
 
     private val viewModel by viewModels<WishListViewModel>()
+
+    private val viewModel2 by viewModels<CheckOutViewModel>()
+
+
+    private val viewModelCheckOutItemInsertViewModel by activityViewModels<CheckOutItemInsertViewModel>()
+
 
     private fun init() {
 
@@ -32,7 +44,6 @@ class WishListFragment : Fragment(), WishListAdapter.ItemClickListener {
 
 
     }
-
 
 
     override fun onCreateView(
@@ -52,6 +63,7 @@ class WishListFragment : Fragment(), WishListAdapter.ItemClickListener {
         init()
         getData()
     }
+
     private fun getData() {
         val data = viewModel.readWishListItem(requireContext())
         Log.d("adapterGetData", "get the data from retro $data")
@@ -71,6 +83,20 @@ class WishListFragment : Fragment(), WishListAdapter.ItemClickListener {
 
     }
 
+    override fun onAddToCart(item: WishListEntity, position: Int) {
+
+        val addtocart = item.toCheckOutItem()
+
+        viewModel2.insertCheckoutItem(
+            checkOutItem = addtocart,
+            context = requireContext()
+        )
+        val updatedSize = context?.let { it1 -> viewModel2.getCheckoutItemsSize(it1) }
+        if (updatedSize != null) {
+            viewModelCheckOutItemInsertViewModel.updateDatabaseSize(updatedSize)
+        }
+
+    }
 
 
 }
