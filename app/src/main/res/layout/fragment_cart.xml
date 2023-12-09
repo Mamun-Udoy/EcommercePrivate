@@ -52,6 +52,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <TextView
+            android:id="@+id/totalCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp"
+            android:text="Total = 0"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+
         <Button
             android:id="@+id/checkoutbutton"
             android:layout_width="wrap_content"

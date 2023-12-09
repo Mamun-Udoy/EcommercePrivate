@@ -30,6 +30,11 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
 
     private val viewModelCheckOutItemDeleteViewModel by activityViewModels<CheckOutItemInsertViewModel>()
 
+
+    var totalPrice = 0.0f
+
+    var cartItemUpdated: List<CheckOutItem> = arrayListOf()
+
     private fun init() {
 
         binding.cartItemRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -57,12 +62,10 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
             viewModelCheckOutItemDeleteViewModel.updateDatabaseSize(updatedSize)
         }
 
+
         binding.checkoutbutton.setOnClickListener {
             requireView().findNavController().navigate(R.id.checkOutFragment)
         }
-
-
-
 
 
     }
@@ -72,6 +75,15 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
         val data = viewModel.readCheckoutItem(requireContext())
         Log.d("adapterGetData", "get the data from retro $data")
         cartAdapter.updateList(data)
+
+
+        cartItemUpdated = data
+
+        cartAdapter.updateList(cartItemUpdated)
+
+        val totalPrice = totalCost()
+
+        Log.d("adapterGetData", "Total Price: $totalPrice")
 
 
     }
@@ -87,8 +99,86 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
         if (updatedSize != null) {
             viewModelCheckOutItemDeleteViewModel.updateDatabaseSize(updatedSize)
         }
-        if (cartAdapter.itemCount<1){
+        if (cartAdapter.itemCount < 1) {
             requireView().findNavController().navigate(R.id.homeFragment)
+        }
+    }
+
+    var count = 1
+    override fun increment(item: CheckOutItem, position: Int) {
+//        var save = item.discount?.let {
+//            item.price?.toFloat()?.div(100)?.times(item!!.discount!!.toFloat())
+//        }
+//
+//        var discountedPrice = save?.let { item?.price?.minus(it) }
+//        count++
+//        if (count < 11) {
+//            totalPrice += discountedPrice!!
+//            binding.totalCost.text = "Total: " + totalPrice.toString()
+//
+//        } else
+//            count--
+
+        totalCost()
+
+
+    }
+
+    override fun decrement(item: CheckOutItem, position: Int) {
+//        var save = item.discount?.let {
+//            item.price?.toFloat()?.div(100)?.times(item!!.discount!!.toFloat())
+//        }
+//
+//        var discountedPrice = save?.let { item?.price?.minus(it) }
+//        count--
+//        if (count > 0) {
+//            totalPrice -= discountedPrice!!
+//            binding.totalCost.text = "Total: " + totalPrice.toString()
+//        }
+//        else count++
+        totalCost()
+
+
+    }
+
+
+    private fun totalCost() {
+
+//        for (item in items) {
+//            val itemPrice = item.price?.toFloat() ?: 0.0f
+//            val itemDiscount = item.discount?.toFloat() ?: 0.0f
+//
+//            val discountAmount = (itemPrice / 100) * itemDiscount
+//            val discountedPrice = itemPrice - discountAmount
+//
+//            totalPrice += discountedPrice
+//        }
+//
+//        binding.totalCost.text = totalPrice.toString()
+//        Log.d("totalprice", "totalCost: ${totalPrice}")
+//        Log.d("checkoutitem", "item size ")
+
+        var totalPrice = 0.0f
+
+        // Assuming viewModel.readCheckoutItem returns a list of items
+        val data = viewModel.readCheckoutItem(requireContext())
+
+        for (item in data) {
+            val save = item.discount?.let {
+                item.price?.toFloat()?.div(100)?.times(item.discount!!.toFloat())
+            }
+
+            val discountedPrice = save?.let { item.price?.minus(it) }
+            val count = cartAdapter.getCountMap().getOrDefault(data.indexOf(item), 1)
+
+            totalPrice += discountedPrice!! * count
+        }
+        binding.totalCost.text= "Total: "+"${formatToTwoDecimalPlaces(totalPrice)}"
+    }
+
+    fun formatToTwoDecimalPlaces(value: Float?): String? {
+        return value?.let {
+            String.format("%.2f", it)
         }
     }
 

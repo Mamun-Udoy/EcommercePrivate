@@ -23,6 +23,8 @@ class CartAdapter(
 
     var cartItemUpdated: MutableList<CheckOutItem> = mutableListOf()
 
+    private var countMap = HashMap<Int, Int>()
+
 
     inner class MyViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -37,23 +39,13 @@ class CartAdapter(
         val item = cartItemUpdated[position]
         holder.binding.data = item
 
-        var discount = item.discount
 
-        var price = item.price
-
-
-        var save = discount?.let { item.price?.toFloat()?.div(100)?.times(discount.toFloat()) }
+        var save = item.discount?.let {
+            item.price?.toFloat()?.div(100)?.times(item!!.discount!!.toFloat())
+        }
 
 
         holder.binding.price.text = "Price " + item?.price.toString()
-
-        fun price(save: Float) {
-            var discountedPrice = save?.let { item?.price?.minus(it) }
-        }
-
-        fun discountedPrice(save: Float) {
-            var save = discount?.let { item.price?.toFloat()?.div(100)?.times(discount.toFloat()) }
-        }
 
 
         var discountedPrice = save?.let { item?.price?.minus(it) }
@@ -93,32 +85,45 @@ class CartAdapter(
             holder.binding.total.text = "Total $value"
         }
 
-        var disPrice =discountedPrice
+        var disPrice = discountedPrice
         holder.binding.plus.setOnClickListener {
+            count = countMap[position] ?: 1
+
             count++
 
-            if (count < 11){
-                if(disPrice!=null){
+            if (count < 11) {
+                if (disPrice != null) {
                     disPrice += discountedPrice!!
                     total(disPrice.toInt())
                 }
+                countMap[position] = count
                 holder.binding.count.text = count.toString()
-            }
-            else count--
+                clickListener.increment(item,position)
+
+            } else count--
         }
         holder.binding.minus.setOnClickListener {
 
+            count = countMap[position] ?: 1
             count--
-            if (count > 0){
-                if(disPrice!=null){
+            if (count > 0) {
+                if (disPrice != null) {
                     disPrice -= discountedPrice!!
                     total(disPrice.toInt())
                 }
+                countMap[position] = count
                 holder.binding.count.text = count.toString()
-            }
-            else count++
+                clickListener.decrement(item,position)
+            } else count++
         }
     }
+
+
+
+    fun getCountMap(): HashMap<Int, Int> {
+        return countMap
+    }
+
 
     fun updateList(items: List<CheckOutItem>) {
         cartItemUpdated.clear()
@@ -145,6 +150,11 @@ class CartAdapter(
 
     interface ItemClickListener {
         fun onItemDeleted(item: CheckOutItem, position: Int)
+
+        fun increment(item: CheckOutItem, position: Int)
+
+        fun decrement(item: CheckOutItem, position: Int)
+
 
     }
 }
