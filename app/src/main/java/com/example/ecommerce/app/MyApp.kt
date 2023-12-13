@@ -1,9 +1,11 @@
 package com.example.ecommerce.app
 
 import android.app.Application
-import android.content.Context
-import com.example.ecommerce.ui.home_product_item.db.ProductDatabase
+import com.example.ecommerce.db.ProductDatabase
+import dagger.hilt.android.HiltAndroidApp
 
+
+@HiltAndroidApp
 class MyApp: Application() {
 
 

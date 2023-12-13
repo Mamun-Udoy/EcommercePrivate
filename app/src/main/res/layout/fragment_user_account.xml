@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.user_account.UserAccountFragment">
+    tools:context=".ui.fragment.UserAccountFragment">
 
 
     <ImageView
@@ -36,75 +36,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/logouticon" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout6"
+    <TextView
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:orientation="vertical"
-        android:weightSum="1"
-        app:layout_constraintBottom_toBottomOf="@id/accountProfile"
+        android:text="Md Abdullah AL Mamun Udoy"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/accountProfile"
-        app:layout_constraintTop_toTopOf="@id/accountProfile">
+        app:layout_constraintTop_toTopOf="@id/accountProfile"
+        app:layout_constraintBottom_toTopOf="@id/mail"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="Md Abdullah AL Mamun Udoy"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="udoy@gmail.com"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/wishListAndOrderHistoryLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/mail"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="udoy@gmail.com"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/accountProfile"
+        app:layout_constraintBottom_toBottomOf="@id/accountProfile"
+        app:layout_constraintTop_toBottomOf="@id/name"/>
 
-        android:layout_marginTop="20dp"
-        android:background="#FF3D00"
-        android:gravity="center"
-        android:orientation="horizontal"
-
-        android:weightSum="1"
-        app:layout_constraintTop_toBottomOf="@id/accountProfile">
-
-<!--        <TextView-->
-<!--            android:id="@+id/wishlistPage"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight=".5"-->
-<!--            android:text="Wishlist"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textSize="16sp" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/orderHistoryPage"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="4dp"-->
-<!--            android:layout_weight=".5"-->
-<!--            android:text="Order History"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textSize="16sp" />-->
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wishListAndOrderHistoryLayout">
+        app:layout_constraintTop_toBottomOf="@+id/accountProfile">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
@@ -115,6 +78,7 @@
             app:tabIndicatorGravity="stretch"
             app:tabIndicator="@drawable/tab_indicator"
             app:tabGravity="fill"
+            app:tabMaxWidth="0dp"
             app:tabIndicatorColor="#C8DC16"
             app:tabMode="fixed"
             app:tabSelectedTextColor="#FF3D00"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/wishListFragment"
-        android:name="com.example.ecommerce.ui.wishlist.WishListFragment"
+        android:name="com.example.ecommerce.ui.fragment.WishListFragment"
         android:label="fragment_wish_list"
         tools:layout="@layout/fragment_wish_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderHistoryFragment"
-        android:name="com.example.ecommerce.ui.order_history.OrderHistoryFragment"
+        android:name="com.example.ecommerce.ui.fragment.OrderHistoryFragment"
         android:label="fragment_order_history"
         tools:layout="@layout/fragment_order_history" />
 </navigation>

@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.ecommerce.ui.home_product_item.HomeFragment"
+        android:name="com.example.ecommerce.ui.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -17,38 +17,38 @@
     </fragment>
     <fragment
         android:id="@+id/productDetails"
-        android:name="com.example.ecommerce.ui.home_product_item.db.ProductDetailsFragment"
+        android:name="com.example.ecommerce.ui.fragment.ProductDetailsFragment"
         android:label="fragment_product_details"
         tools:layout="@layout/fragment_product_details" />
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.example.ecommerce.ui.cart.CartFragment"
+        android:name="com.example.ecommerce.ui.fragment.CartFragment"
         android:label="CartFragment"
         tools:layout="@layout/fragment_cart"/>
     <fragment
         android:id="@+id/checkOutFragment"
-        android:name="com.example.ecommerce.ui.check_out_item.CheckOutFragment"
+        android:name="com.example.ecommerce.ui.fragment.CheckOutFragment"
         android:label="fragment_check_out"
         tools:layout="@layout/fragment_check_out" />
     <fragment
         android:id="@+id/paymentFragment"
-        android:name="com.example.ecommerce.ui.payment.PaymentFragment"
+        android:name="com.example.ecommerce.ui.fragment.PaymentFragment"
         android:label="fragment_payment"
         tools:layout="@layout/fragment_payment" />
     <fragment
         android:id="@+id/cardPaymentFragment"
-        android:name="com.example.ecommerce.ui.payment.CardPaymentFragment"
+        android:name="com.example.ecommerce.ui.fragment.CardPaymentFragment"
         android:label="fragment_card_payment"
         tools:layout="@layout/fragment_card_payment" />
     <fragment
         android:id="@+id/userAccount"
-        android:name="com.example.ecommerce.ui.user_account.UserAccountFragment"
+        android:name="com.example.ecommerce.ui.fragment.UserAccountFragment"
         android:label="fragment_user_account"
         tools:layout="@layout/fragment_user_account" />
 
     <activity
         android:id="@+id/loginActivity"
-        android:name="com.example.ecommerce.ui.login.LoginActivity"
+        android:name="com.example.ecommerce.ui.activity.auth.LoginActivity"
         android:label="LoginActivity"
         tools:layout="@layout/activity_login"/>
 </navigation>

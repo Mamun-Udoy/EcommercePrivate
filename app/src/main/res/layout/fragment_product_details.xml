@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home_product_item.db.ProductDetailsFragment"
-    android:layout_margin="8dp"
-    android:orientation="vertical">
+    tools:context=".ui.fragment.ProductDetailsFragment"
+    android:layout_margin="8dp">
 
     <org.imaginativeworld.whynotimagecarousel.ImageCarousel
         android:id="@+id/carousel"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="256dp"
 
         app:autoPlay="true"
@@ -42,37 +41,61 @@
         app:showTopShadow="true"
         app:topShadowAlpha="0.6"
         app:topShadowHeight="32dp"
-        app:touchToPause="true" />
+        app:touchToPause="true"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
+        android:padding="8dp"
         android:id="@+id/discount"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="discount:" />
+        android:text="discount:"
+        app:layout_constraintStart_toStartOf="@+id/carousel"
+        app:layout_constraintTop_toBottomOf="@+id/carousel"
+        app:layout_constraintEnd_toEndOf="@+id/carousel"/>
 
     <TextView
         android:id="@+id/rating"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="rating:" />
+        android:text="rating:"
+        app:layout_constraintTop_toBottomOf="@id/discount"
+        app:layout_constraintStart_toStartOf="@id/discount"
+        app:layout_constraintEnd_toEndOf="@id/discount"/>
 
     <TextView
         android:id="@+id/stock"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="stock:" />
+        android:text="stock:"
+        app:layout_constraintStart_toStartOf="@id/rating"
+        app:layout_constraintEnd_toEndOf="@id/rating"
+        app:layout_constraintTop_toBottomOf="@id/rating"/>
 
     <TextView
         android:id="@+id/brand"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="brand:" />
+        android:text="brand:"
+        app:layout_constraintStart_toStartOf="@id/stock"
+        app:layout_constraintEnd_toEndOf="@id/stock"
+        app:layout_constraintTop_toBottomOf="@id/stock"/>
 
     <TextView
         android:id="@+id/categories"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="category:" />
+        android:text="category:"
+        app:layout_constraintStart_toStartOf="@id/brand"
+        app:layout_constraintEnd_toEndOf="@id/brand"
+        app:layout_constraintTop_toBottomOf="@id/brand"/>
 
     <Button
         style="@style/Widget.MaterialComponents.Button.Icon"
@@ -82,7 +105,10 @@
         android:id="@+id/checkout"
         android:text="ADD TO CART"
         android:backgroundTint="#B11313"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        app:layout_constraintStart_toStartOf="@id/categories"
+        app:layout_constraintEnd_toEndOf="@id/categories"
+        app:layout_constraintTop_toBottomOf="@id/categories"/>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

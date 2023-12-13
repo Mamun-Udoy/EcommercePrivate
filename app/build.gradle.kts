@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id ("dagger.hilt.android.plugin")
 
 
 
@@ -71,6 +72,7 @@ dependencies {
     //room implementation
     val room_version = "2.6.0";
     implementation("androidx.room:room-runtime:$room_version")
+    implementation ("androidx.room:room-ktx:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
 
@@ -121,4 +123,9 @@ dependencies {
     debugImplementation ("com.github.chuckerteam.chucker:library:4.0.0")
 
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
+
+    //hilt
+    val hilt_version = "2.46.1"
+    implementation ("com.google.dagger:hilt-android:$hilt_version")
+    kapt ("com.google.dagger:hilt-android-compiler:$hilt_version")
 }

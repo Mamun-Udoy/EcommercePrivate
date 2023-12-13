@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.check_out_item.CheckOutFragment">
+    tools:context=".ui.fragment.CheckOutFragment">
+
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        app:cardElevation="150dp"
-
+        app:cardElevation="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -29,9 +29,11 @@
                 android:textSize="16dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/name"/>
 
             <TextView
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -63,10 +65,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
-
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -76,11 +75,14 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:layout_width="180dp"
+                android:id="@+id/vatTax"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="VAT included, where applicable"
                 android:textSize="12sp"
+                android:layout_marginStart="12dp"
                 android:textStyle="bold"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/placeOrder"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,6 +97,7 @@
                 android:elevation="60dp"
                 android:text="place order"
                 android:textAlignment="center"
+                app:layout_constraintStart_toEndOf="@id/vatTax"
                 app:layout_constraintBottom_toBottomOf="@+id/view"
                 app:layout_constraintEnd_toEndOf="@+id/view"
                 app:layout_constraintTop_toTopOf="@+id/view" />

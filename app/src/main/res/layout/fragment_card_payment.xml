@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.payment.CardPaymentFragment">
+    tools:context=".ui.fragment.CardPaymentFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
@@ -104,9 +104,9 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FF3D00"
+        android:background="@color/appColor"
         android:text="Pay Now"
-        app:backgroundTint="#FF3D00"
+        app:backgroundTint="@color/appColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

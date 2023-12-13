@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="toolbar">#FF5900</color>
+    <color name="appColor">#FF5900</color>
 
 
 </resources>
