@@ -14,7 +14,7 @@ import com.example.ecommerce.db.dao.WishListItemDao
 
 @Database(
     entities = [ProductEntity::class, CheckOutItemEntity::class, WishListEntity::class],
-    version = 15
+    version = 16
 )
 abstract class ProductDatabase : RoomDatabase() {
 

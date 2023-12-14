@@ -29,6 +29,8 @@
         android:id="@+id/cartItemRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingVertical="4dp"
+        android:clipToPadding="false"
         android:background="#EAE9E9"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"

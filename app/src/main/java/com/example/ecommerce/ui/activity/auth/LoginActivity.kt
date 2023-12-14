@@ -73,7 +73,8 @@ class LoginActivity : AppCompatActivity() {
                     }
                 } else {
                     val errorMessage = validationResult.second
-                    Toast.makeText(this, "$errorMessage", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+
                 }
 
 

@@ -14,7 +14,8 @@ data class CheckOutItemEntity(
     var brand: String? = null,
     var category: String? = null,
     var thumbnail: String? = null,
-    var price: Int? = null
+    var price: Int? = null,
+    var qty: Int = 1
 )
 
 

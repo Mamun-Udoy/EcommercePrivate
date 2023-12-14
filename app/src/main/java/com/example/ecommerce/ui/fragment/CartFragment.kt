@@ -1,5 +1,6 @@
 package com.example.ecommerce.ui.fragment
 
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -21,9 +22,11 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
 
     private lateinit var binding: FragmentCartBinding
 
-    private val cartAdapter: CartAdapter by lazy { CartAdapter(arrayListOf(), this) }
+    private val cartAdapter: CartAdapter by lazy { CartAdapter( this) }
 
     private val viewModel by viewModels<CheckOutViewModel>()
+
+    private val cartViewModel by viewModels<CartViewModel>()
 
 //    private val viewModel2: CartViewModel by viewModels()// we also can decleare in this way
 
@@ -58,7 +61,7 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         init()
         getData()
-
+        observeTotalCost()
         // Observe totalPrice LiveData
 //        cartViewModel.totalPrice.observe(viewLifecycleOwner, Observer { totalPrice ->
 //
@@ -73,12 +76,23 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
             viewModelCheckOutItemDeleteViewModel.updateDatabaseSize(updatedSize)
         }
 
+        cartViewModel.countMapLiveData.observe(viewLifecycleOwner) { countMap ->
+            // Update your UI with the new count map
+
+            // Call your method to update the UI based on the count map
+        }
 
         binding.checkoutbutton.setOnClickListener {
             requireView().findNavController().navigate(R.id.checkOutFragment)
         }
 
 
+    }
+
+    private fun observeTotalCost() {
+        viewModel.totalCostLiveData.observe(viewLifecycleOwner) {
+            binding.totalCost.text = "Total = $it"
+        }
     }
 
 
@@ -92,7 +106,6 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
 
         cartAdapter.updateList(cartItemUpdated)
 
-        val totalPrice = totalCost()
 
         Log.d("adapterGetData", "Total Price: $totalPrice")
 
@@ -115,78 +128,9 @@ class CartFragment : Fragment(), CartAdapter.ItemClickListener {
         }
     }
 
-    var count = 1
-    override fun increment(item: CheckOutItemEntity, position: Int) {
-//        var save = item.discount?.let {
-//            item.price?.toFloat()?.div(100)?.times(item!!.discount!!.toFloat())
-//        }
-//
-//        var discountedPrice = save?.let { item?.price?.minus(it) }
-//        count++
-//        if (count < 11) {
-//            totalPrice += discountedPrice!!
-//            binding.totalCost.text = "Total: " + totalPrice.toString()
-//
-//        } else
-//            count--
-
-        totalCost()
-
-
-    }
-
-    override fun decrement(item: CheckOutItemEntity, position: Int) {
-//        var save = item.discount?.let {
-//            item.price?.toFloat()?.div(100)?.times(item!!.discount!!.toFloat())
-//        }
-//
-//        var discountedPrice = save?.let { item?.price?.minus(it) }
-//        count--
-//        if (count > 0) {
-//            totalPrice -= discountedPrice!!
-//            binding.totalCost.text = "Total: " + totalPrice.toString()
-//        }
-//        else count++
-        totalCost()
-
-
-    }
-
-
-    private fun totalCost() {
-
-//        for (item in items) {
-//            val itemPrice = item.price?.toFloat() ?: 0.0f
-//            val itemDiscount = item.discount?.toFloat() ?: 0.0f
-//
-//            val discountAmount = (itemPrice / 100) * itemDiscount
-//            val discountedPrice = itemPrice - discountAmount
-//
-//            totalPrice += discountedPrice
-//        }
-//
-//        binding.totalCost.text = totalPrice.toString()
-//        Log.d("totalprice", "totalCost: ${totalPrice}")
-//        Log.d("checkoutitem", "item size ")
-
-        var totalPrice = 0.0f
-
-        // Assuming viewModel.readCheckoutItem returns a list of items
-        val data = viewModel.readCheckoutItem(requireContext())
-
-        for (item in data) {
-            val save = item.discount?.let {
-                item.price?.toFloat()?.div(100)?.times(item.discount!!.toFloat())
-            }
-
-            val discountedPrice = save?.let { item.price?.minus(it) }
-            val count = cartAdapter.getCountMap().getOrDefault(data.indexOf(item), 1)
-
-            totalPrice += discountedPrice!! * count
-        }
-        binding.totalCost.text= "Total: "+"${formatToTwoDecimalPlaces(totalPrice)}"
-//        cartViewModel.updateTotalPrice(totalPrice)
-
+    override fun updateItem(item: CheckOutItemEntity) {
+        // update database
+        viewModel.updateItem(item,requireContext())
     }
 
     fun formatToTwoDecimalPlaces(value: Float?): String? {

@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.ecommerce.db.entities.CheckOutItemEntity
 
 @Dao
@@ -24,6 +25,9 @@ interface CheckOutItemDao {
 
     @Query("DELETE FROM CheckOutItem")
     fun deleteAllCheckoutItems()
+
+    @Update
+    fun updateItem(item: CheckOutItemEntity)
 
 
 
