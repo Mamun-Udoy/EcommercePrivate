@@ -2,8 +2,6 @@ package com.example.ecommerce.utils
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 
 class SharedPreferencesManager(private val context: Context) {
 

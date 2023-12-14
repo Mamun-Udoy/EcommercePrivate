@@ -2,7 +2,6 @@ package com.example.ecommerce.ui.fragment
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ecommerce.db.ProductDatabase
 import com.example.ecommerce.db.entities.CheckOutItemEntity

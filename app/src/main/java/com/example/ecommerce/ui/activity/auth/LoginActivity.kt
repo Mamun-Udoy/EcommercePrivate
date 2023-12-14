@@ -41,6 +41,10 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
+            var rememberMe = false
+            binding.rememberMeCheckbox.setOnClickListener {
+                rememberMe = true
+            }
 
             binding.login.setOnClickListener {
 
@@ -55,8 +59,9 @@ class LoginActivity : AppCompatActivity() {
                     viewModel.getUserInfo(userName, userPassword)
                     viewModel.loginResult.observe(this) { token ->
                         if (!token.isNullOrEmpty()) {
+                            if (rememberMe)
+                                pref.setLoggedIn()
 
-                            pref.setLoggedIn()
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             finish()
@@ -74,8 +79,6 @@ class LoginActivity : AppCompatActivity() {
 
             }
         }
-
-
 
 
     }
