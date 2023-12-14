@@ -11,4 +11,6 @@ class AppRepo @Inject constructor(
     suspend fun userLogin(url: String,userDataRequest: UserLoginRequest) = api.login(url,userDataRequest)
 
     suspend fun userSignUp(url: String, userRegistrationRequest: UserRegistrationRequest) = api.signup(url, userRegistrationRequest)
+
+
 }

@@ -16,12 +16,13 @@
         android:textColor="@color/appColor"
         android:textSize="32sp"
         android:textStyle="bold"
+        app:layout_constraintVertical_chainStyle="packed"
         android:layout_marginHorizontal="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/UserName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.20" />
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/UserName"
@@ -32,6 +33,7 @@
         app:layout_constraintEnd_toEndOf="@+id/apptitle"
         app:layout_constraintStart_toStartOf="@+id/apptitle"
         app:layout_constraintTop_toBottomOf="@+id/apptitle"
+        app:layout_constraintBottom_toTopOf="@id/password"
         app:startIconDrawable="@drawable/ic_person">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -53,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="@+id/UserName"
         app:layout_constraintStart_toStartOf="@+id/UserName"
         app:layout_constraintTop_toBottomOf="@+id/UserName"
-
+        app:layout_constraintBottom_toTopOf="@+id/rememberMeCheckbox"
         app:startIconDrawable="@drawable/ic_lock">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -72,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Remember Me"
-
+        app:layout_constraintBottom_toTopOf="@+id/text1"
         app:layout_constraintEnd_toStartOf="@+id/forgotPassword"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="@+id/password"
@@ -94,6 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Dont have any account?"
+        app:layout_constraintBottom_toTopOf="@+id/continueWithoutSignup"
         app:layout_constraintStart_toStartOf="@+id/rememberMeCheckbox"
         app:layout_constraintTop_toBottomOf="@+id/rememberMeCheckbox" />
 
@@ -115,6 +118,7 @@
         android:layout_marginTop="8dp"
         android:text="Continue Without Sign Up"
         app:layout_constraintStart_toStartOf="@+id/text1"
+        app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintTop_toBottomOf="@+id/text1" />
 
 
@@ -127,6 +131,7 @@
         android:text="LOGIN"
         android:textSize="20dp"
         app:backgroundTint="@color/appColor"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/UserName"
         app:layout_constraintStart_toStartOf="@+id/UserName"
         app:layout_constraintTop_toBottomOf="@+id/continueWithoutSignup" />

@@ -17,12 +17,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
-            android:layout_marginTop="24dp"
             android:gravity="center"
             android:text="ShopifyX"
             android:textColor="@color/appColor"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintBottom_toTopOf="@+id/UserEmail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +37,7 @@
             app:layout_constraintEnd_toEndOf="@id/apptitle"
             app:layout_constraintStart_toStartOf="@id/apptitle"
             app:layout_constraintTop_toBottomOf="@id/apptitle"
+            app:layout_constraintBottom_toTopOf="@id/UserName"
             app:startIconDrawable="@drawable/ic_email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -57,6 +58,7 @@
             app:layout_constraintEnd_toEndOf="@id/UserEmail"
             app:layout_constraintStart_toStartOf="@id/UserEmail"
             app:layout_constraintTop_toBottomOf="@+id/UserEmail"
+            app:layout_constraintBottom_toTopOf="@id/Userpassword"
             app:startIconDrawable="@drawable/ic_person">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -76,6 +78,7 @@
             app:layout_constraintEnd_toEndOf="@id/UserName"
             app:layout_constraintStart_toStartOf="@id/UserName"
             app:layout_constraintTop_toBottomOf="@+id/UserName"
+            app:layout_constraintBottom_toTopOf="@id/FirstName"
             app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -96,7 +99,8 @@
             android:hint="First Name"
             app:layout_constraintEnd_toStartOf="@id/LastName"
             app:layout_constraintStart_toStartOf="@id/Userpassword"
-            app:layout_constraintTop_toBottomOf="@id/Userpassword">
+            app:layout_constraintTop_toBottomOf="@id/Userpassword"
+            app:layout_constraintBottom_toTopOf="@id/City">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/firstname"
@@ -134,7 +138,8 @@
             android:hint="City"
             app:layout_constraintEnd_toStartOf="@id/Street"
             app:layout_constraintStart_toStartOf="@id/FirstName"
-            app:layout_constraintTop_toBottomOf="@+id/FirstName">
+            app:layout_constraintTop_toBottomOf="@+id/FirstName"
+            app:layout_constraintBottom_toTopOf="@id/Number">
 
             <com.google.android.material.textfield.TextInputEditText
 
@@ -173,7 +178,8 @@
             android:hint="Number"
             app:layout_constraintEnd_toStartOf="@id/Zipcode"
             app:layout_constraintStart_toStartOf="@id/City"
-            app:layout_constraintTop_toBottomOf="@+id/City">
+            app:layout_constraintTop_toBottomOf="@+id/City"
+            app:layout_constraintBottom_toTopOf="@id/Lat">
 
             <com.google.android.material.textfield.TextInputEditText
 
@@ -211,7 +217,8 @@
             android:hint="Latitude"
             app:layout_constraintEnd_toStartOf="@+id/Longitude"
             app:layout_constraintStart_toStartOf="@id/Number"
-            app:layout_constraintTop_toBottomOf="@id/Number">
+            app:layout_constraintTop_toBottomOf="@id/Number"
+            app:layout_constraintBottom_toTopOf="@id/Userphonenumber">
 
             <com.google.android.material.textfield.TextInputEditText
 
@@ -250,6 +257,7 @@
             app:layout_constraintEnd_toEndOf="@+id/Longitude"
             app:layout_constraintStart_toStartOf="@+id/Lat"
             app:layout_constraintTop_toBottomOf="@+id/Lat"
+            app:layout_constraintBottom_toTopOf="@+id/AlreadyHave"
             app:startIconDrawable="@drawable/ic_phone">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -262,17 +270,18 @@
 
         <TextView
             android:id="@+id/AlreadyHave"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+
             android:text="Already have an Account"
             app:layout_constraintStart_toStartOf="@+id/Userphonenumber"
-            app:layout_constraintTop_toBottomOf="@+id/Userphonenumber" />
+            app:layout_constraintTop_toBottomOf="@+id/Userphonenumber"
+            app:layout_constraintBottom_toTopOf="@id/signUp"/>
 
 
         <TextView
             android:id="@+id/signIn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text=" Sign In"
@@ -285,11 +294,11 @@
             android:id="@+id/signUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:backgroundTint="@color/appColor"
             android:text="Sign Up"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/Userphonenumber"
+            app:layout_constraintStart_toStartOf="@id/Userphonenumber"
             app:layout_constraintTop_toBottomOf="@+id/AlreadyHave" />
 
 
