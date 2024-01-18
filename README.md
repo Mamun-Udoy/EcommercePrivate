@@ -1,4 +1,8 @@
 # Ecommerce Application
+
+
+udoy 
+## First page containing basic authentication option of user where they will get to signUp and signIn
 ![Login](https://github.com/Mamun-Udoy/EcommercePrivate/assets/147803630/02df1898-743a-41e1-9d72-c1b6eb10c82b)
 ![SignUp](https://github.com/Mamun-Udoy/EcommercePrivate/assets/147803630/6cfb5992-431b-4552-9911-199d289449a5)
 ![Home](https://github.com/Mamun-Udoy/EcommercePrivate/assets/147803630/270ba539-fb73-44cc-b644-4d610bfbaae7)
